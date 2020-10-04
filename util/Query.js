@@ -35,7 +35,10 @@ class DashupQuery {
         this.query.push([method, args]);
 
         // call
-        const data = await this.dashup.call('query', {
+        const data = await this.dashup.rpc({
+          type   : 'query',
+          struct : this.module,
+        }, 'query', {
           id    : this.module,
           query : this.query,
         });
@@ -127,7 +130,10 @@ class DashupQuery {
         this.query.push([proxies[listens.indexOf(method)], args]);
 
         // call
-        const data = await this.dashup.call('query', {
+        const data = await this.dashup.rpc({
+          type   : 'query',
+          struct : this.module,
+        }, 'query', {
           id     : this.module,
           query  : this.query,
           listen : listenID,
