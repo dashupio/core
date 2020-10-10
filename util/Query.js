@@ -12,7 +12,7 @@ class DashupQuery {
   constructor(mod, dashup) {
     // set module
     this.query = [];
-    this.module = mod;
+    this.page = mod;
     this.dashup = dashup;
 
     // loop query methods
@@ -36,12 +36,11 @@ class DashupQuery {
 
         // call
         const data = await this.dashup.rpc({
-          type   : 'query',
-          struct : this.module,
-        }, 'query', {
-          id    : this.module,
-          query : this.query,
-        });
+          type   : 'page',
+          struct : this.page,
+        }, 'model.query', {
+          page : this.page,
+        }, this.query);
 
         // return types
         if (Array.isArray(data)) {
@@ -131,13 +130,11 @@ class DashupQuery {
 
         // call
         const data = await this.dashup.rpc({
-          type   : 'query',
-          struct : this.module,
-        }, 'query', {
-          id     : this.module,
-          query  : this.query,
-          listen : listenID,
-        });
+          type   : 'page',
+          struct : this.page,
+        }, 'model.query', {
+          page : this.page,
+        }, this.query, listenID);
 
         // return types
         if (Array.isArray(data)) {
