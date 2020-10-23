@@ -9,10 +9,10 @@ class DashupQuery {
   /**
    * construct dashup query
    */
-  constructor(mod, dashup) {
+  constructor(page, dashup) {
     // set module
+    this.page = page;
     this.query = [];
-    this.page = mod;
     this.dashup = dashup;
 
     // loop query methods
@@ -28,7 +28,7 @@ class DashupQuery {
     });
 
     // complete
-    ['sum', 'count', 'find', 'findOne', 'findById'].forEach((method) => {
+    ['sum', 'count', 'find', 'findOne', 'findById', 'findByIds'].forEach((method) => {
       // push to query
       this[method] = async (...args) => {
         // push to query
@@ -37,10 +37,9 @@ class DashupQuery {
         // call
         const data = await this.dashup.rpc({
           type   : 'page',
+          page   : this.page,
           struct : this.page,
-        }, 'model.query', {
-          page : this.page,
-        }, this.query);
+        }, 'model.query', this.query);
 
         // return types
         if (Array.isArray(data)) {
@@ -131,10 +130,9 @@ class DashupQuery {
         // call
         const data = await this.dashup.rpc({
           type   : 'page',
+          page   : this.page,
           struct : this.page,
-        }, 'model.query', {
-          page : this.page,
-        }, this.query, listenID);
+        }, 'model.query', this.query, listenID);
 
         // return types
         if (Array.isArray(data)) {
