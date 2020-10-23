@@ -15,7 +15,6 @@
     "node": ">= 8.0.0"
   },
   "devDependencies": {
-    "@dashup/eslint-config-dashup": "0.0.1",
-    "eslint": "^7.11.0"
+    "@dashup/eslint-config-dashup": "0.0.1"
   }
 }
