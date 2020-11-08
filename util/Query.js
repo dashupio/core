@@ -28,7 +28,7 @@ class DashupQuery {
     });
 
     // complete
-    ['sum', 'count', 'find', 'findOne', 'findById', 'findByIds'].forEach((method) => {
+    ['sum', 'avg', 'count', 'find', 'findOne', 'findById', 'findByIds'].forEach((method) => {
       // push to query
       this[method] = async (...args) => {
         // push to query
