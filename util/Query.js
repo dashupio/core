@@ -140,7 +140,7 @@ class DashupQuery {
 
           // set opts
           arr.set('page', this.page);
-          arr.set('listne', listenID);
+          arr.set('listen', listenID);
           arr.set('dashup', this.dashup);
 
           // return array

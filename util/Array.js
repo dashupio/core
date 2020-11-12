@@ -1,4 +1,3 @@
-
 // events
 const Events = require('events');
 const dotProp = require('dot-prop');
@@ -20,6 +19,11 @@ class EdenArray extends Array {
     // create events
     this.__data = {};
     this.events = new Events();
+
+    // bind
+    this.get = this.get.bind(this);
+    this.set = this.set.bind(this);
+    this.deafen = this.deafen.bind(this);
 
     // events methods
     ['on', 'emit', 'once', 'removeListener'].forEach((method) => {
