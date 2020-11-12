@@ -5,7 +5,6 @@ const EdenArray = require('./Array');
 
 // create dashup base class
 class DashupQuery {
-
   /**
    * construct dashup query
    */
@@ -43,7 +42,7 @@ class DashupQuery {
 
         // return types
         if (Array.isArray(data)) {
-          return data.map(item => new Model(item, this.dashup));
+          return data.map((item) => new Model(item, this.dashup));
         }
         if (data && typeof data === 'object') {
           return new Model(data, this.dashup);
@@ -137,7 +136,12 @@ class DashupQuery {
         // return types
         if (Array.isArray(data)) {
           // create listenable array
-          arr = new EdenArray(...(data.map(item => new Model(item, this.dashup))));
+          arr = new EdenArray(...(data.map((item) => new Model(item, this.dashup))));
+
+          // set opts
+          arr.set('page', this.page);
+          arr.set('listne', listenID);
+          arr.set('dashup', this.dashup);
 
           // return array
           return arr;
@@ -145,6 +149,9 @@ class DashupQuery {
         if (data && typeof data === 'object') {
           // set model
           model = new Model(data, this.dashup);
+
+          // set listen
+          model.set('_meta.listen', listenID);
 
           // return model
           return model;

@@ -76,6 +76,18 @@ class EdenArray extends Array {
     // set to value
     return dotProp.get(this.__data, key);
   }
+
+  /**
+   * deafen
+   */
+  deafen() {
+    // call
+    return this.get('listen') ? this.get('dashup').rpc({
+      type   : 'page',
+      page   : this.get('page'),
+      struct : this.get('page'),
+    }, 'deafen', this.get('listen')) : null;
+  }
 }
 
 /**
