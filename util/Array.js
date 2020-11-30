@@ -1,7 +1,7 @@
 // events
-const Events = require('events');
 const dotProp = require('dot-prop');
 const deepEqual = require('fast-deep-equal');
+const { EventEmitter } = require('events');
 
 /**
  * eden array
@@ -18,7 +18,7 @@ class EdenArray extends Array {
 
     // create events
     this.__data = {};
-    this.events = new Events();
+    this.events = new EventEmitter();
 
     // bind
     this.get = this.get.bind(this);

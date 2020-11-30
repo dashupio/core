@@ -1,11 +1,11 @@
 
 // require dependencies
-const Events = require('events');
 const dotProp = require('dot-prop');
 const deepEqual = require('fast-deep-equal');
+const { EventEmitter } = require('events');
 
 // create dashup base class
-class DashupBase extends Events {
+class DashupBase extends EventEmitter {
 
   /**
    * construct dashup base
@@ -14,7 +14,7 @@ class DashupBase extends Events {
    */
   constructor(data = {}, dashup) {
     // run super
-    super(...arguments);
+    super();
 
     // create data object
     this.__data = {};
