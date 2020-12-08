@@ -15,7 +15,7 @@ class DashupQuery {
     this.dashup = dashup;
 
     // loop query methods
-    ['where', 'eq', 'inc', 'gt', 'or', 'lt', 'gte', 'lte', 'skip', 'sort', 'limit', 'match', 'ne', 'nin', 'in', 'or', 'and'].forEach((method) => {
+    ['where', 'eq', 'inc', 'gt', 'or', 'lt', 'gte', 'lte', 'skip', 'sort', 'limit', 'search', 'match', 'ne', 'nin', 'in', 'or', 'and'].forEach((method) => {
       // set method
       this[method] = (...args) => {
         // push to query
