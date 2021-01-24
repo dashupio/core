@@ -42,10 +42,10 @@ class DashupQuery {
 
         // return types
         if (Array.isArray(data)) {
-          return data.map((item) => new Model(item, this.dashup));
+          return data.map((item) => (item && item._id ? new Model(item, this.dashup) : item));
         }
         if (data && typeof data === 'object') {
-          return new Model(data, this.dashup);
+          return data._id ? new Model(data, this.dashup) : data;
         }
 
         // return data
