@@ -1,7 +1,7 @@
 {
   "name": "@dashup/core",
   "description": "nothing yet",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "dependencies": {
     "dot-prop": "^6.0.0",
     "fast-deep-equal": "^3.1.3",
