@@ -1,30 +1,14 @@
 
 // import dependencies
+import View from '@dashup/view';
 import React from 'react';
 import dotProp from 'dot-prop';
-import shortid from 'shortid';
 import ReactDOM from 'react-dom';
-import { View } from '@dashup/ui';
 
 // Base
 import Base from './util/Base';
 import Query from './util/Query';
 import Model from './Model';
-
-// cammel
-const toCammel = (str) => {
-  // Lower cases the string
-  return str.toLowerCase()
-    // Replaces any - or _ characters with a space 
-    .replace( /[-_]+/g, ' ')
-    // Removes any non alphanumeric characters 
-    .replace( /[^\w\s]/g, '')
-    // Uppercases the first character in each group immediately following a space 
-    // (delimited by spaces) 
-    .replace( / (.)/g, function($1) { return $1.toUpperCase(); })
-    // Removes spaces 
-    .replace( / /g, '' );
-};
 
 /**
  * create Dashup

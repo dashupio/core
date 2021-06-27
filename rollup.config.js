@@ -40,8 +40,9 @@ export default {
     }),
     babel({
       extensions,
+      ignore  : [],
       babelrc : true,
-      include : ['src/**/*'],
+      include : ['src/**/*', 'node_modules/**/*'],
     }),
     external(),
     del({
