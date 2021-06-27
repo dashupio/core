@@ -8703,7 +8703,9 @@ var DashupUIView = function DashupUIView() {
 
 
             try {
-              // expand data
+              var _shimGlobal$uuid; // expand data
+
+
               var _data = _slicedToArray(data, 1),
                   _data$ = _data[0],
                   code = _data$.code,
@@ -8729,7 +8731,7 @@ var DashupUIView = function DashupUIView() {
               } // set code
 
 
-              var actualView = shimGlobal[uuid] && shimGlobal[uuid]["default"] || shimGlobal[uuid]; // set to cache
+              var actualView = ((_shimGlobal$uuid = shimGlobal[uuid]) === null || _shimGlobal$uuid === void 0 ? void 0 : _shimGlobal$uuid["default"]) || shimGlobal[uuid]; // set to cache
 
               dotProp$1.set(viewCache, item, actualView); // finish loading
 
