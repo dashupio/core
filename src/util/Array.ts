@@ -1,12 +1,12 @@
 // events
-const dotProp = require('dot-prop');
-const deepEqual = require('fast-deep-equal');
-const { EventEmitter } = require('events');
+import dotProp from 'dot-prop';
+import deepEqual from 'fast-deep-equal';
+import { EventEmitter } from 'events';
 
 /**
- * eden array
+ * dashup array
  */
-class EdenArray extends Array {
+export default class DashupArray extends Array {
   /**
    * create array
    *
@@ -93,8 +93,3 @@ class EdenArray extends Array {
     }, 'deafen', this.get('listen')) : null;
   }
 }
-
-/**
- * eden array
- */
-module.exports = EdenArray;

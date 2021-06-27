@@ -1,11 +1,15 @@
 
-const dotProp = require('dot-prop');
+// import dependencies
+import React from 'react';
+import dotProp from 'dot-prop';
+import shortid from 'shortid';
+import ReactDOM from 'react-dom';
+import { View } from '@dashup/ui';
+
 // Base
-const riot = require('riot');
-const shortid = require('shortid');
-const Base = require('../util/Base');
-const Query = require('../util/Query');
-const Model = require('./Model');
+import Base from './util/Base';
+import Query from './util/Query';
+import Model from './Model';
 
 // cammel
 const toCammel = (str) => {
@@ -22,19 +26,10 @@ const toCammel = (str) => {
     .replace( / /g, '' );
 };
 
-// set to window
-if (typeof window !== 'undefined') {
-  // set riot
-  window.dashupRiot = riot;
-
-  // require runtime
-  window.regeneratorRuntime = require('regenerator-runtime');
-}
-
 /**
  * create Dashup
  */
-class DashupPage extends Base {
+export default class DashupPage extends Base {
   /**
    * construct dashup section
    *
@@ -171,70 +166,21 @@ class DashupPage extends Base {
    * @param {*} opts
    */
   async view(selector, view, opts, type = 'page', struct = null) {
-    // tld
-    const tld = `${type}.${this.get('type')}.${view}`.split('/').join('');
-
-    // check if components has
-    if (!this.dashup.get(`views.${tld}`)) {
-      // loading
-      if (!this.dashup.get(`views.loading.${tld}`)) {
-        // rpc
-        this.dashup.set(`views.loading.${tld}`, this.dashup.rpc({
-          type,
-          page   : this.get('_id'),
-          struct : struct || this.get('type'),
-        }, 'views', [view]));
-      }
-
-      // data
-      const data = await this.dashup.get(`views.loading.${tld}`);
-
-      // check data
-      if (!data) return;
-
-      // get view
-      const [actualView] = data;
-
-      // id
-      const id = `v${shortid()}`;
-
-      // create new function
-      // eslint-disable-next-line no-new-func
-      new Function(`return ${actualView.code}`)();
-
-      // built view
-      const builtView = window[actualView.uuid].default || window[actualView.uuid];
-
-      // reset name
-      builtView.name = toCammel(id);
-
-      // css
-      if (builtView.css) {
-        // find in css
-        const name = builtView.css.split('[is="')[1].split('"]')[0];
-
-        // check name
-        if (name) {
-          // namespace css properly
-          builtView.css = builtView.css.split(`[is="${name}"]`).join(`[is="${builtView.name}"]`);
-        }
-      }
-
-      // register
-      riot.register(builtView.name, builtView);
-
-      // set to eden
-      this.dashup.set(`views.${tld}`, builtView);
-    }
-
-    // create component
-    const createComponent = riot.component(this.dashup.get(`views.${tld}`));
-
-    // create component
-    return createComponent(document.querySelector(selector), Object.assign({}, opts, {
+    // create element
+    const el = React.createElement(View, { ...opts, ...{
       page   : this,
       dashup : this.dashup,
-    }));
+
+      view,
+      type,
+      struct : struct || this.get('type'),
+    } });
+
+    // mount app
+    ReactDOM.render(el, document.querySelector(selector));
+
+    // return el
+    return el;
   }
 
 
@@ -666,6 +612,3 @@ class DashupPage extends Base {
     });
   }
 }
-
-// export dashup section
-module.exports = DashupPage;

@@ -1,11 +1,10 @@
-
 // Base
-const Base = require('../util/Base');
+import Base from './util/Base';
 
 /**
  * create Dashup
  */
-class DashupSection extends Base {
+export default class DashupSection extends Base {
   /**
    * construct dashup section
    *
@@ -16,13 +15,11 @@ class DashupSection extends Base {
     super(...args);
   }
 
-
   // //////////////////////////////////////////////////////////////////////
   //
   // SUB METHODS
   //
   // //////////////////////////////////////////////////////////////////////
-
 
   /**
    * get opts
@@ -32,7 +29,7 @@ class DashupSection extends Base {
     if (id && value) {
       // set
       this.dashup.pages.set(id, new Page(value, this));
-      
+
       // emit pages
       this.emit('pages', this.dashup.pages);
     }
@@ -46,8 +43,4 @@ class DashupSection extends Base {
     // return page
     return page;
   }
-
 }
-
-// export dashup section
-module.exports = DashupSection;

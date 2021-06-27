@@ -1,21 +1,19 @@
 
 // require local dependencies
-const io     = require('socket.io-client');
-const uuid   = require('uuid').v4;
-const cookie = require('js-cookie');
-
-// Base
-const Base = require('../util/Base');
+import io from 'socket.io-client';
+import uuid from 'shortid';
+import cookie from 'js-cookie';
 
 // require page
-const Page    = require('./Page');
-const Model   = require('./Model');
-const Section = require('./Section');
+import Base from './util/Base';
+import Page from './Page';
+import Model from './Model';
+import Section from './Section';
 
 /**
  * create Dashup
  */
-class Dashup extends Base {
+export default class Dashup extends Base {
   /**
    * construct Dashup
    *
@@ -27,6 +25,7 @@ class Dashup extends Base {
 
     // set opts
     this.__opts = opts || {};
+    this.__version = '0.0.2';
 
     // bind methods
     this.rpc = this.rpc.bind(this);
@@ -418,8 +417,3 @@ class Dashup extends Base {
     return Section;
   }
 }
-
-/**
- * export Dashup
- */
-module.exports = Dashup;

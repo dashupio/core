@@ -1,10 +1,10 @@
 // import model
-const uuid = require('uuid').v4;
-const Model = require('../lib/Model');
-const EdenArray = require('./Array');
+import uuid from 'shortid';
+import Model from '../Model';
+import DashupArray from './Array';
 
 // create dashup base class
-class DashupQuery {
+export default class DashupQuery {
   /**
    * construct dashup query
    */
@@ -136,7 +136,7 @@ class DashupQuery {
         // return types
         if (Array.isArray(data)) {
           // create listenable array
-          arr = new EdenArray(...(data.map((item) => new Model(item, this.dashup))));
+          arr = new DashupArray(...(data.map((item) => new Model(item, this.dashup))));
 
           // set opts
           arr.set('page', this.page);
@@ -163,6 +163,3 @@ class DashupQuery {
     });
   }
 }
-
-// export query
-module.exports = DashupQuery;

@@ -1,10 +1,10 @@
 // Base
-const Base = require('../util/Base');
+import Base from './util/Base';
 
 /**
  * create Dashup
  */
-class DashupModel extends Base {
+export default class DashupModel extends Base {
   /**
    * construct module
    */
@@ -136,8 +136,3 @@ class DashupModel extends Base {
     return sanitisedData;
   }
 }
-
-/**
- * export dashup module
- */
-module.exports = DashupModel;

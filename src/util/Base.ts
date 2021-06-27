@@ -1,11 +1,11 @@
 
 // require dependencies
-const dotProp = require('dot-prop');
-const deepEqual = require('fast-deep-equal');
-const { EventEmitter } = require('events');
+import dotProp from 'dot-prop';
+import deepEqual from 'fast-deep-equal';
+import { EventEmitter } from 'events';
 
 // create dashup base class
-class DashupBase extends EventEmitter {
+export default class DashupBase extends EventEmitter {
 
   /**
    * construct dashup base
@@ -94,8 +94,3 @@ class DashupBase extends EventEmitter {
    */
   static init() {}
 }
-
-/**
- * export dashup base
- */
-module.exports = DashupBase;
