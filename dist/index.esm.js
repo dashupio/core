@@ -1,17 +1,7 @@
 import '@babel/polyfill';
 import { EventEmitter } from 'events';
-import moment from 'moment';
-import prettyMs from 'pretty-ms';
-import reactDOM from 'react-dom';
-import dashupUI from '@dashup/ui';
-import handlebars from 'handlebars';
-import ReactSelect from 'react-select';
-import ReactSortable from 'react-sortablejs';
-import ReactBootstrap from 'react-bootstrap';
-import ReactSelectAsync from 'react-select/async';
-import HandlebarsHelpers from 'handlebars-helpers';
-import ReactPerfectScrollbar from 'react-perfect-scrollbar';
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
@@ -9111,20 +9101,7 @@ var dotProp = {
 };
 var viewCache = {};
 var loadCache = {};
-var requCache = {
-  react: React,
-  moment: moment,
-  handlebars: handlebars,
-  'pretty-ms': prettyMs,
-  'react-dom': reactDOM,
-  '@dashup/ui': dashupUI,
-  'react-select': ReactSelect,
-  'react-bootstrap': ReactBootstrap,
-  'react-sortablejs': ReactSortable,
-  'react-select/async': ReactSelectAsync,
-  'handlebars-helpers': HandlebarsHelpers,
-  'react-perfect-scrollbar': ReactPerfectScrollbar
-}; // create menu component
+var requCache = {}; // create menu component
 
 var DashupUIView = function DashupUIView() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {}; // get type/view/struct
@@ -9223,6 +9200,14 @@ var DashupUIView = function DashupUIView() {
     // error
     console.error("[dashup] view ".concat(type, ":").concat(struct, " ").concat(view), e);
   }
+}; // set defaults
+
+
+DashupUIView.setDefaults = function (def) {
+  // loop
+  Object.keys(def).map(function (key) {
+    requCache[key] = def[key];
+  });
 }; // export default
 
 /**
@@ -9982,7 +9967,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
                   struct: struct || this.get('type')
                 })); // mount app
 
-                reactDOM.render(el, document.querySelector(selector)); // return el
+                ReactDOM.render(el, document.querySelector(selector)); // return el
 
                 return _context.abrupt("return", el);
 

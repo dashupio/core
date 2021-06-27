@@ -2,33 +2,13 @@
 
 require('@babel/polyfill');
 var events = require('events');
-var moment = require('moment');
-var prettyMs = require('pretty-ms');
-var reactDOM = require('react-dom');
-var dashupUI = require('@dashup/ui');
-var handlebars = require('handlebars');
-var ReactSelect = require('react-select');
-var ReactSortable = require('react-sortablejs');
-var ReactBootstrap = require('react-bootstrap');
-var ReactSelectAsync = require('react-select/async');
-var HandlebarsHelpers = require('handlebars-helpers');
-var ReactPerfectScrollbar = require('react-perfect-scrollbar');
 var React = require('react');
+var ReactDOM = require('react-dom');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-var moment__default = /*#__PURE__*/_interopDefaultLegacy(moment);
-var prettyMs__default = /*#__PURE__*/_interopDefaultLegacy(prettyMs);
-var reactDOM__default = /*#__PURE__*/_interopDefaultLegacy(reactDOM);
-var dashupUI__default = /*#__PURE__*/_interopDefaultLegacy(dashupUI);
-var handlebars__default = /*#__PURE__*/_interopDefaultLegacy(handlebars);
-var ReactSelect__default = /*#__PURE__*/_interopDefaultLegacy(ReactSelect);
-var ReactSortable__default = /*#__PURE__*/_interopDefaultLegacy(ReactSortable);
-var ReactBootstrap__default = /*#__PURE__*/_interopDefaultLegacy(ReactBootstrap);
-var ReactSelectAsync__default = /*#__PURE__*/_interopDefaultLegacy(ReactSelectAsync);
-var HandlebarsHelpers__default = /*#__PURE__*/_interopDefaultLegacy(HandlebarsHelpers);
-var ReactPerfectScrollbar__default = /*#__PURE__*/_interopDefaultLegacy(ReactPerfectScrollbar);
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
+var ReactDOM__default = /*#__PURE__*/_interopDefaultLegacy(ReactDOM);
 
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
@@ -9128,20 +9108,7 @@ var dotProp = {
 };
 var viewCache = {};
 var loadCache = {};
-var requCache = {
-  react: React__default['default'],
-  moment: moment__default['default'],
-  handlebars: handlebars__default['default'],
-  'pretty-ms': prettyMs__default['default'],
-  'react-dom': reactDOM__default['default'],
-  '@dashup/ui': dashupUI__default['default'],
-  'react-select': ReactSelect__default['default'],
-  'react-bootstrap': ReactBootstrap__default['default'],
-  'react-sortablejs': ReactSortable__default['default'],
-  'react-select/async': ReactSelectAsync__default['default'],
-  'handlebars-helpers': HandlebarsHelpers__default['default'],
-  'react-perfect-scrollbar': ReactPerfectScrollbar__default['default']
-}; // create menu component
+var requCache = {}; // create menu component
 
 var DashupUIView = function DashupUIView() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {}; // get type/view/struct
@@ -9240,6 +9207,14 @@ var DashupUIView = function DashupUIView() {
     // error
     console.error("[dashup] view ".concat(type, ":").concat(struct, " ").concat(view), e);
   }
+}; // set defaults
+
+
+DashupUIView.setDefaults = function (def) {
+  // loop
+  Object.keys(def).map(function (key) {
+    requCache[key] = def[key];
+  });
 }; // export default
 
 /**
@@ -9999,7 +9974,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
                   struct: struct || this.get('type')
                 })); // mount app
 
-                reactDOM__default['default'].render(el, document.querySelector(selector)); // return el
+                ReactDOM__default['default'].render(el, document.querySelector(selector)); // return el
 
                 return _context.abrupt("return", el);
 
