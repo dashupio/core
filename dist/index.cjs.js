@@ -2,13 +2,11 @@
 
 require('@babel/polyfill');
 var events = require('events');
-var View = require('@dashup/ui');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-var View__default = /*#__PURE__*/_interopDefaultLegacy(View);
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 var ReactDOM__default = /*#__PURE__*/_interopDefaultLegacy(ReactDOM);
 
@@ -303,19 +301,19 @@ function _get(target, property, receiver) {
   return _get(target, property, receiver || target);
 }
 
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+function _slicedToArray$1(arr, i) {
+  return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest$1();
 }
 
 function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread();
 }
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
 }
 
-function _arrayWithHoles(arr) {
+function _arrayWithHoles$1(arr) {
   if (Array.isArray(arr)) return arr;
 }
 
@@ -323,7 +321,7 @@ function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 
-function _iterableToArrayLimit(arr, i) {
+function _iterableToArrayLimit$1(arr, i) {
   var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
 
   if (_i == null) return;
@@ -353,16 +351,16 @@ function _iterableToArrayLimit(arr, i) {
   return _arr;
 }
 
-function _unsupportedIterableToArray(o, minLen) {
+function _unsupportedIterableToArray$1(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
 }
 
-function _arrayLikeToArray(arr, len) {
+function _arrayLikeToArray$1(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
 
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
@@ -374,7 +372,7 @@ function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-function _nonIterableRest() {
+function _nonIterableRest$1() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
@@ -8627,6 +8625,348 @@ var js_cookie = createCommonjsModule(function (module, exports) {
   });
 });
 
+var isObj$1 = value => {
+  const type = typeof value;
+  return value !== null && (type === 'object' || type === 'function');
+};
+
+const disallowedKeys$1 = new Set(['__proto__', 'prototype', 'constructor']);
+
+const isValidPath$1 = pathSegments => !pathSegments.some(segment => disallowedKeys$1.has(segment));
+
+function getPathSegments$1(path) {
+  const pathArray = path.split('.');
+  const parts = [];
+
+  for (let i = 0; i < pathArray.length; i++) {
+    let p = pathArray[i];
+
+    while (p[p.length - 1] === '\\' && pathArray[i + 1] !== undefined) {
+      p = p.slice(0, -1) + '.';
+      p += pathArray[++i];
+    }
+
+    parts.push(p);
+  }
+
+  if (!isValidPath$1(parts)) {
+    return [];
+  }
+
+  return parts;
+}
+
+var dotProp$1 = {
+  get(object, path, value) {
+    if (!isObj$1(object) || typeof path !== 'string') {
+      return value === undefined ? object : value;
+    }
+
+    const pathArray = getPathSegments$1(path);
+
+    if (pathArray.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < pathArray.length; i++) {
+      object = object[pathArray[i]];
+
+      if (object === undefined || object === null) {
+        // `object` is either `undefined` or `null` so we want to stop the loop, and
+        // if this is not the last bit of the path, and
+        // if it did't return `undefined`
+        // it would return `null` if `object` is `null`
+        // but we want `get({foo: null}, 'foo.bar')` to equal `undefined`, or the supplied value, not `null`
+        if (i !== pathArray.length - 1) {
+          return value;
+        }
+
+        break;
+      }
+    }
+
+    return object === undefined ? value : object;
+  },
+
+  set(object, path, value) {
+    if (!isObj$1(object) || typeof path !== 'string') {
+      return object;
+    }
+
+    const root = object;
+    const pathArray = getPathSegments$1(path);
+
+    for (let i = 0; i < pathArray.length; i++) {
+      const p = pathArray[i];
+
+      if (!isObj$1(object[p])) {
+        object[p] = {};
+      }
+
+      if (i === pathArray.length - 1) {
+        object[p] = value;
+      }
+
+      object = object[p];
+    }
+
+    return root;
+  },
+
+  delete(object, path) {
+    if (!isObj$1(object) || typeof path !== 'string') {
+      return false;
+    }
+
+    const pathArray = getPathSegments$1(path);
+
+    for (let i = 0; i < pathArray.length; i++) {
+      const p = pathArray[i];
+
+      if (i === pathArray.length - 1) {
+        delete object[p];
+        return true;
+      }
+
+      object = object[p];
+
+      if (!isObj$1(object)) {
+        return false;
+      }
+    }
+  },
+
+  has(object, path) {
+    if (!isObj$1(object) || typeof path !== 'string') {
+      return false;
+    }
+
+    const pathArray = getPathSegments$1(path);
+
+    if (pathArray.length === 0) {
+      return false;
+    } // eslint-disable-next-line unicorn/no-for-loop
+
+
+    for (let i = 0; i < pathArray.length; i++) {
+      if (isObj$1(object)) {
+        if (!(pathArray[i] in object)) {
+          return false;
+        }
+
+        object = object[pathArray[i]];
+      } else {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+};
+
+var fastDeepEqual = function equal(a, b) {
+  if (a === b) return true;
+
+  if (a && b && typeof a == 'object' && typeof b == 'object') {
+    if (a.constructor !== b.constructor) return false;
+    var length, i, keys;
+
+    if (Array.isArray(a)) {
+      length = a.length;
+      if (length != b.length) return false;
+
+      for (i = length; i-- !== 0;) if (!equal(a[i], b[i])) return false;
+
+      return true;
+    }
+
+    if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
+    if (a.valueOf !== Object.prototype.valueOf) return a.valueOf() === b.valueOf();
+    if (a.toString !== Object.prototype.toString) return a.toString() === b.toString();
+    keys = Object.keys(a);
+    length = keys.length;
+    if (length !== Object.keys(b).length) return false;
+
+    for (i = length; i-- !== 0;) if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+
+    for (i = length; i-- !== 0;) {
+      var key = keys[i];
+      if (!equal(a[key], b[key])) return false;
+    }
+
+    return true;
+  } // true if both NaN, false otherwise
+
+
+  return a !== a && b !== b;
+};
+
+var DashupBase = /*#__PURE__*/function (_EventEmitter) {
+  _inherits(DashupBase, _EventEmitter);
+
+  var _super = _createSuper(DashupBase);
+
+  /**
+   * construct dashup base
+   *
+   * @param {Object} data 
+   */
+  function DashupBase() {
+    var _this;
+
+    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var dashup = arguments.length > 1 ? arguments[1] : undefined;
+
+    _classCallCheck(this, DashupBase);
+
+    // run super
+    _this = _super.call(this); // create data object
+
+    _this.__data = {};
+    _this.dashup = dashup; // set
+
+    Object.keys(data).forEach(function (key) {
+      return _this.set(key, data[key]);
+    });
+    return _this;
+  } // //////////////////////////////////////////////////////////////////////
+  //
+  // GET/SET METHODS
+  //
+  // //////////////////////////////////////////////////////////////////////
+
+  /**
+   * dotprop set
+   *
+   * @param {*} key 
+   * @param {*} value 
+   */
+
+
+  _createClass(DashupBase, [{
+    key: "set",
+    value: function set(key, value) {
+      var _this2 = this;
+
+      // check emission
+      if (fastDeepEqual(this.get(key), value)) return this.__data; // set to value
+
+      var done = dotProp$1.set(this.__data, key, value); // emit
+
+      var emission = []; // emit all
+
+      key.split('.').forEach(function (section) {
+        // push section
+        emission.push(section); // emit
+
+        _this2.emit(emission.join('.'), _this2.get(emission.join('.')));
+      }); // return done
+
+      return done;
+    }
+    /**
+     * dotprop get
+     *
+     * @param {*} key 
+     */
+
+  }, {
+    key: "get",
+    value: function get(key) {
+      // set to value
+      return dotProp$1.get(this.__data, key);
+    }
+    /**
+     * dotprop delete
+     *
+     * @param {*} key 
+     */
+
+  }, {
+    key: "delete",
+    value: function _delete(key) {
+      // set to value
+      return dotProp$1["delete"](this.__data, key);
+    } // //////////////////////////////////////////////////////////////////////
+    //
+    // STATIC METHODS
+    //
+    // //////////////////////////////////////////////////////////////////////
+
+    /**
+     * init module
+     *
+     * @param {*} social 
+     */
+
+  }], [{
+    key: "init",
+    value: function init() {}
+  }]);
+
+  return DashupBase;
+}(events.EventEmitter);
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
 var isObj = value => {
   const type = typeof value;
   return value !== null && (type === 'object' || type === 'function');
@@ -8766,149 +9106,165 @@ var dotProp = {
   }
 
 };
+var viewCache = {};
+var loadCache = {};
+var requCache = {}; // loop require
+// do this to allow individual modules to work without requiring their dependencies
 
-var fastDeepEqual = function equal(a, b) {
-  if (a === b) return true;
+try {
+  requCache.react = require('react');
+} catch (e) {}
 
-  if (a && b && typeof a == 'object' && typeof b == 'object') {
-    if (a.constructor !== b.constructor) return false;
-    var length, i, keys;
+try {
+  requCache.moment = require('moment');
+} catch (e) {}
 
-    if (Array.isArray(a)) {
-      length = a.length;
-      if (length != b.length) return false;
+try {
+  requCache.handlebars = require('handlebars');
+} catch (e) {}
 
-      for (i = length; i-- !== 0;) if (!equal(a[i], b[i])) return false;
+try {
+  requCache['pretty-ms'] = require('pretty-ms');
+} catch (e) {}
 
-      return true;
+try {
+  requCache['react-dom'] = require('react-dom');
+} catch (e) {}
+
+try {
+  requCache['@dashup/ui'] = require('@dashup/ui');
+} catch (e) {}
+
+try {
+  requCache['react-select'] = require('react-select');
+} catch (e) {}
+
+try {
+  requCache['react-bootstrap'] = require('react-bootstrap');
+} catch (e) {}
+
+try {
+  requCache['react-sortablejs'] = require('react-sortablejs');
+} catch (e) {}
+
+try {
+  requCache['react-select/async'] = require('react-select/async');
+} catch (e) {}
+
+try {
+  requCache['handlebars-helpers'] = require('handlebars-helpers');
+} catch (e) {}
+
+try {
+  requCache['react-perfect-scrollbar'] = require('react-perfect-scrollbar');
+} catch (e) {} // require all
+
+
+Object.keys(requCache).forEach(function (key) {
+  // try/catch require
+  try {
+    requCache[key] = require(key);
+  } catch (e) {}
+}); // create menu component
+
+var DashupView = function DashupView() {
+  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {}; // get type/view/struct
+
+  var type = props.type,
+      view = props.view,
+      struct = props.struct,
+      dashup = props.dashup; // set loading
+
+  var _useState = React.useState(!(!view || !type || !struct || !dashup)),
+      _useState2 = _slicedToArray(_useState, 2),
+      loading = _useState2[0],
+      setLoading = _useState2[1]; // tld
+
+
+  var item = "".concat(type, ".").concat(struct, ".").concat(view).split('/').join('-'); // check has view
+
+  React.useEffect(function () {
+    // use effect
+    if (!dotProp.get(viewCache, item)) {
+      // set loading
+      setLoading(true); // try loading
+
+      if (dotProp.get(loadCache, item)) {
+        // await loaded from another module
+        dotProp.get(loadCache, item).then(function () {
+          return setLoading(false);
+        });
+      } else {
+        // create load cache item
+        dotProp.set(loadCache, item, new Promise(function (resolve) {
+          // load
+          props.dashup.rpc({
+            type: type,
+            struct: struct
+          }, 'views', [view]).then(function (data) {
+            // check not found
+            if (!data || !data[0]) {
+              resolve(null);
+              setLoading(false);
+              return console.log("[dashup] view ".concat(type, ":").concat(struct, " ").concat(view, " not found"));
+            } // try/catch
+
+
+            try {
+              // expand data
+              var _data = _slicedToArray(data, 1),
+                  _data$ = _data[0],
+                  code = _data$.code,
+                  uuid = _data$.uuid; // create global
+
+
+              var shimGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : null; // check window
+
+              if (!shimGlobal.shimRequire) {
+                // create shim require function
+                shimGlobal.shimRequire = function (name) {
+                  // names
+                  if (requCache[name]) return requCache[name];
+                };
+              } // create new function
+
+
+              try {
+                // try/catch
+                new Function("const require = ".concat(typeof window === 'undefined' ? 'global' : 'window', ".shimRequire; ").concat(code))();
+              } catch (e) {
+                console.error("[dashup] view ".concat(type, ":").concat(struct, " ").concat(view), e);
+              } // set code
+
+
+              var actualView = shimGlobal[uuid] && shimGlobal[uuid]["default"] || shimGlobal[uuid]; // set to cache
+
+              dotProp.set(viewCache, item, actualView); // finish loading
+
+              resolve(actualView);
+              setLoading(false);
+            } catch (e) {
+              // error
+              console.error("[dashup] view ".concat(type, ":").concat(struct, " ").concat(view), e);
+            }
+          });
+        }));
+      }
     }
+  }, [struct, type, view]); // get component
 
-    if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
-    if (a.valueOf !== Object.prototype.valueOf) return a.valueOf() === b.valueOf();
-    if (a.toString !== Object.prototype.toString) return a.toString() === b.toString();
-    keys = Object.keys(a);
-    length = keys.length;
-    if (length !== Object.keys(b).length) return false;
+  var Component = dotProp.get(viewCache, item); // on load
 
-    for (i = length; i-- !== 0;) if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+  if (Component && !loading && props.onLoad) setTimeout(props.onLoad, 100); // create new function
 
-    for (i = length; i-- !== 0;) {
-      var key = keys[i];
-      if (!equal(a[key], b[key])) return false;
-    }
-
-    return true;
-  } // true if both NaN, false otherwise
-
-
-  return a !== a && b !== b;
-};
-
-var DashupBase = /*#__PURE__*/function (_EventEmitter) {
-  _inherits(DashupBase, _EventEmitter);
-
-  var _super = _createSuper(DashupBase);
-
-  /**
-   * construct dashup base
-   *
-   * @param {Object} data 
-   */
-  function DashupBase() {
-    var _this;
-
-    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var dashup = arguments.length > 1 ? arguments[1] : undefined;
-
-    _classCallCheck(this, DashupBase);
-
-    // run super
-    _this = _super.call(this); // create data object
-
-    _this.__data = {};
-    _this.dashup = dashup; // set
-
-    Object.keys(data).forEach(function (key) {
-      return _this.set(key, data[key]);
-    });
-    return _this;
-  } // //////////////////////////////////////////////////////////////////////
-  //
-  // GET/SET METHODS
-  //
-  // //////////////////////////////////////////////////////////////////////
-
-  /**
-   * dotprop set
-   *
-   * @param {*} key 
-   * @param {*} value 
-   */
-
-
-  _createClass(DashupBase, [{
-    key: "set",
-    value: function set(key, value) {
-      var _this2 = this;
-
-      // check emission
-      if (fastDeepEqual(this.get(key), value)) return this.__data; // set to value
-
-      var done = dotProp.set(this.__data, key, value); // emit
-
-      var emission = []; // emit all
-
-      key.split('.').forEach(function (section) {
-        // push section
-        emission.push(section); // emit
-
-        _this2.emit(emission.join('.'), _this2.get(emission.join('.')));
-      }); // return done
-
-      return done;
-    }
-    /**
-     * dotprop get
-     *
-     * @param {*} key 
-     */
-
-  }, {
-    key: "get",
-    value: function get(key) {
-      // set to value
-      return dotProp.get(this.__data, key);
-    }
-    /**
-     * dotprop delete
-     *
-     * @param {*} key 
-     */
-
-  }, {
-    key: "delete",
-    value: function _delete(key) {
-      // set to value
-      return dotProp["delete"](this.__data, key);
-    } // //////////////////////////////////////////////////////////////////////
-    //
-    // STATIC METHODS
-    //
-    // //////////////////////////////////////////////////////////////////////
-
-    /**
-     * init module
-     *
-     * @param {*} social 
-     */
-
-  }], [{
-    key: "init",
-    value: function init() {}
-  }]);
-
-  return DashupBase;
-}(events.EventEmitter);
+  try {
+    // return JSX
+    return Component ? /*#__PURE__*/React__default['default'].createElement(Component, props) : props.children || /*#__PURE__*/React__default['default'].createElement("div", null);
+  } catch (e) {
+    // error
+    console.error("[dashup] view ".concat(type, ":").concat(struct, " ").concat(view), e);
+  }
+}; // export default
 
 /**
  * create Dashup
@@ -9187,7 +9543,7 @@ var DashupArray = /*#__PURE__*/function (_Array) {
       // check emission
       if (fastDeepEqual(this.get(key), value)) return this.__data; // set to value
 
-      var done = dotProp.set(this.__data, key, value); // emit
+      var done = dotProp$1.set(this.__data, key, value); // emit
 
       var emission = []; // emit all
 
@@ -9210,7 +9566,7 @@ var DashupArray = /*#__PURE__*/function (_Array) {
     key: "get",
     value: function get(key) {
       // set to value
-      return dotProp.get(this.__data, key);
+      return dotProp$1.get(this.__data, key);
     }
     /**
      * deafen
@@ -9659,7 +10015,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
                 type = _args.length > 3 && _args[3] !== undefined ? _args[3] : 'page';
                 struct = _args.length > 4 && _args[4] !== undefined ? _args[4] : null;
                 // create element
-                el = /*#__PURE__*/React__default['default'].createElement(View__default['default'], _objectSpread2(_objectSpread2({}, opts), {
+                el = /*#__PURE__*/React__default['default'].createElement(DashupView, _objectSpread2(_objectSpread2({}, opts), {
                   page: this,
                   dashup: this.dashup,
                   view: _view,
@@ -10180,7 +10536,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
           // get field
           var productField = _this5.field('product', 'field') || {}; // return value
 
-          return accum + (dotProp.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".price")) || 0) * (count || 0);
+          return accum + (dotProp$1.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".price")) || 0) * (count || 0);
         }, 0); // return total
 
         return total;
@@ -10193,11 +10549,11 @@ var DashupPage = /*#__PURE__*/function (_Base) {
         return Array.from((products || _this5.cart.get('products') || []).reduce(function (accum, _ref13) {
           var product = _ref13.product;
           // type
-          var type = dotProp.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".type")); // type
+          var type = dotProp$1.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".type")); // type
 
           if (type === 'subscription') {
             // type
-            accum.add(dotProp.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".period")) || 'monthly');
+            accum.add(dotProp$1.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".period")) || 'monthly');
           } else {
             // add product
             accum.add(type);
@@ -10210,11 +10566,11 @@ var DashupPage = /*#__PURE__*/function (_Base) {
           accum[type] = _this5.total(_toConsumableArray((products || _this5.cart.get('products') || []).filter(function (_ref14) {
             var product = _ref14.product;
             // type
-            var t = dotProp.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".type")); // type
+            var t = dotProp$1.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".type")); // type
 
             if (t === 'subscription') {
               // type
-              return (dotProp.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".period")) || 'monthly') === type;
+              return (dotProp$1.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".period")) || 'monthly') === type;
             } // add product
 
 
@@ -10518,7 +10874,7 @@ var Dashup = /*#__PURE__*/function (_Base) {
                 }; // loop values
 
                 [['page', 'pages'], ['section', 'sections']].forEach(function (_ref) {
-                  var _ref2 = _slicedToArray(_ref, 2),
+                  var _ref2 = _slicedToArray$1(_ref, 2),
                       type = _ref2[0],
                       plural = _ref2[1];
 
