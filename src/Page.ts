@@ -1,6 +1,5 @@
 
 // import dependencies
-import View from '@dashup/view';
 import React from 'react';
 import dotProp from 'dot-prop';
 import ReactDOM from 'react-dom';
@@ -151,7 +150,7 @@ export default class DashupPage extends Base {
    */
   async view(selector, view, opts, type = 'page', struct = null) {
     // create element
-    const el = React.createElement(View, { ...opts, ...{
+    const el = React.createElement(this.dashup.View, { ...opts, ...{
       page   : this,
       dashup : this.dashup,
 

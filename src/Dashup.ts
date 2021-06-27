@@ -2,6 +2,7 @@
 // require local dependencies
 import io from 'socket.io-client';
 import uuid from 'shortid';
+import View from '@dashup/view';
 import cookie from 'js-cookie';
 
 // require page
@@ -391,6 +392,14 @@ export default class Dashup extends Base {
   get opts() {
     // return opts
     return this.__opts;
+  }
+
+  /**
+   * get view
+   */
+  get View() {
+    // return opts
+    return View;
   }
 
   /**
