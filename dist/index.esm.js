@@ -1,7 +1,17 @@
 import '@babel/polyfill';
 import { EventEmitter } from 'events';
+import moment from 'moment';
+import prettyMs from 'pretty-ms';
+import reactDOM from 'react-dom';
+import dashupUI from '@dashup/ui';
+import handlebars from 'handlebars';
+import ReactSelect from 'react-select';
+import ReactSortable from 'react-sortablejs';
+import ReactBootstrap from 'react-bootstrap';
+import ReactSelectAsync from 'react-select/async';
+import HandlebarsHelpers from 'handlebars-helpers';
+import ReactPerfectScrollbar from 'react-perfect-scrollbar';
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
@@ -9101,66 +9111,22 @@ var dotProp = {
 };
 var viewCache = {};
 var loadCache = {};
-var requCache = {}; // loop require
-// do this to allow individual modules to work without requiring their dependencies
+var requCache = {
+  react: React,
+  moment: moment,
+  handlebars: handlebars,
+  'pretty-ms': prettyMs,
+  'react-dom': reactDOM,
+  '@dashup/ui': dashupUI,
+  'react-select': ReactSelect,
+  'react-bootstrap': ReactBootstrap,
+  'react-sortablejs': ReactSortable,
+  'react-select/async': ReactSelectAsync,
+  'handlebars-helpers': HandlebarsHelpers,
+  'react-perfect-scrollbar': ReactPerfectScrollbar
+}; // create menu component
 
-try {
-  requCache.react = require('react');
-} catch (e) {}
-
-try {
-  requCache.moment = require('moment');
-} catch (e) {}
-
-try {
-  requCache.handlebars = require('handlebars');
-} catch (e) {}
-
-try {
-  requCache['pretty-ms'] = require('pretty-ms');
-} catch (e) {}
-
-try {
-  requCache['react-dom'] = require('react-dom');
-} catch (e) {}
-
-try {
-  requCache['@dashup/ui'] = require('@dashup/ui');
-} catch (e) {}
-
-try {
-  requCache['react-select'] = require('react-select');
-} catch (e) {}
-
-try {
-  requCache['react-bootstrap'] = require('react-bootstrap');
-} catch (e) {}
-
-try {
-  requCache['react-sortablejs'] = require('react-sortablejs');
-} catch (e) {}
-
-try {
-  requCache['react-select/async'] = require('react-select/async');
-} catch (e) {}
-
-try {
-  requCache['handlebars-helpers'] = require('handlebars-helpers');
-} catch (e) {}
-
-try {
-  requCache['react-perfect-scrollbar'] = require('react-perfect-scrollbar');
-} catch (e) {} // require all
-
-
-Object.keys(requCache).forEach(function (key) {
-  // try/catch require
-  try {
-    requCache[key] = require(key);
-  } catch (e) {}
-}); // create menu component
-
-var DashupView = function DashupView() {
+var DashupUIView = function DashupUIView() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {}; // get type/view/struct
 
   var type = props.type,
@@ -10008,7 +9974,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
                 type = _args.length > 3 && _args[3] !== undefined ? _args[3] : 'page';
                 struct = _args.length > 4 && _args[4] !== undefined ? _args[4] : null;
                 // create element
-                el = /*#__PURE__*/React.createElement(DashupView, _objectSpread2(_objectSpread2({}, opts), {
+                el = /*#__PURE__*/React.createElement(DashupUIView, _objectSpread2(_objectSpread2({}, opts), {
                   page: this,
                   dashup: this.dashup,
                   view: _view,
@@ -10016,7 +9982,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
                   struct: struct || this.get('type')
                 })); // mount app
 
-                ReactDOM.render(el, document.querySelector(selector)); // return el
+                reactDOM.render(el, document.querySelector(selector)); // return el
 
                 return _context.abrupt("return", el);
 
