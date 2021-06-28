@@ -10418,42 +10418,69 @@ var DashupPage = /*#__PURE__*/function (_Base) {
         }, 0);
       };
 
+      this.clear = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+        var result;
+        return regeneratorRuntime.wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.next = 2;
+                return _this5.rpc('cart.clear');
+
+              case 2:
+                result = _context9.sent;
+                // set cart
+                setCart(result);
+
+                _this5.emit('cart', _this5.cart); // return user
+
+
+                return _context9.abrupt("return", _this5.cart);
+
+              case 6:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9);
+      }));
+
       this.remove = /*#__PURE__*/function () {
-        var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(product) {
+        var _ref12 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(product) {
           var opts,
               result,
-              _args9 = arguments;
-          return regeneratorRuntime.wrap(function _callee9$(_context9) {
+              _args10 = arguments;
+          return regeneratorRuntime.wrap(function _callee10$(_context10) {
             while (1) {
-              switch (_context9.prev = _context9.next) {
+              switch (_context10.prev = _context10.next) {
                 case 0:
-                  opts = _args9.length > 1 && _args9[1] !== undefined ? _args9[1] : {};
-                  _context9.next = 3;
+                  opts = _args10.length > 1 && _args10[1] !== undefined ? _args10[1] : {};
+                  _context10.next = 3;
                   return _this5.rpc('cart.remove', {
                     opts: opts,
                     product: product._id || product.get('_id')
                   });
 
                 case 3:
-                  result = _context9.sent;
+                  result = _context10.sent;
                   // set cart
                   setCart(result);
 
                   _this5.emit('cart', _this5.cart); // return user
 
 
-                  return _context9.abrupt("return", _this5.cart);
+                  return _context10.abrupt("return", _this5.cart);
 
                 case 7:
                 case "end":
-                  return _context9.stop();
+                  return _context10.stop();
               }
             }
-          }, _callee9);
+          }, _callee10);
         }));
 
         return function (_x11) {
-          return _ref11.apply(this, arguments);
+          return _ref12.apply(this, arguments);
         };
       }(); // totals
 
@@ -10478,9 +10505,9 @@ var DashupPage = /*#__PURE__*/function (_Base) {
 
       this.total = function (products) {
         // get total
-        var total = (products || _this5.cart.get('products') || []).reduce(function (accum, _ref12) {
-          var product = _ref12.product,
-              count = _ref12.count;
+        var total = (products || _this5.cart.get('products') || []).reduce(function (accum, _ref13) {
+          var product = _ref13.product,
+              count = _ref13.count;
           // get field
           var productField = _this5.field('product', 'field') || {}; // return value
 
@@ -10494,8 +10521,8 @@ var DashupPage = /*#__PURE__*/function (_Base) {
         // get field
         var productField = _this5.field('product', 'field') || {}; // return
 
-        return Array.from((products || _this5.cart.get('products') || []).reduce(function (accum, _ref13) {
-          var product = _ref13.product;
+        return Array.from((products || _this5.cart.get('products') || []).reduce(function (accum, _ref14) {
+          var product = _ref14.product;
           // type
           var type = dotProp.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".type")); // type
 
@@ -10511,8 +10538,8 @@ var DashupPage = /*#__PURE__*/function (_Base) {
           return accum;
         }, new Set())).reduce(function (accum, type) {
           // add total
-          accum[type] = _this5.total(_toConsumableArray((products || _this5.cart.get('products') || []).filter(function (_ref14) {
-            var product = _ref14.product;
+          accum[type] = _this5.total(_toConsumableArray((products || _this5.cart.get('products') || []).filter(function (_ref15) {
+            var product = _ref15.product;
             // type
             var t = dotProp.get(product.get ? product.get() : product, "".concat(productField.name || productField.uuid, ".type")); // type
 
@@ -10578,13 +10605,13 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       this.modelInit(); // check login
 
       this.submit = /*#__PURE__*/function () {
-        var _ref15 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(data) {
+        var _ref16 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(data) {
           var result;
-          return regeneratorRuntime.wrap(function _callee10$(_context10) {
+          return regeneratorRuntime.wrap(function _callee11$(_context11) {
             while (1) {
-              switch (_context10.prev = _context10.next) {
+              switch (_context11.prev = _context11.next) {
                 case 0:
-                  _context10.next = 2;
+                  _context11.next = 2;
                   return _this6.dashup.action({
                     type: 'page',
                     page: _this6.get('data.model'),
@@ -10594,19 +10621,19 @@ var DashupPage = /*#__PURE__*/function (_Base) {
                   }, 'form.submit', data);
 
                 case 2:
-                  result = _context10.sent;
-                  return _context10.abrupt("return", new DashupModel(result, _this6.dashup));
+                  result = _context11.sent;
+                  return _context11.abrupt("return", new DashupModel(result, _this6.dashup));
 
                 case 4:
                 case "end":
-                  return _context10.stop();
+                  return _context11.stop();
               }
             }
-          }, _callee10);
+          }, _callee11);
         }));
 
         return function (_x12) {
-          return _ref15.apply(this, arguments);
+          return _ref16.apply(this, arguments);
         };
       }();
     }
@@ -10621,13 +10648,13 @@ var DashupPage = /*#__PURE__*/function (_Base) {
 
       // create
       this.create = /*#__PURE__*/function () {
-        var _ref16 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(data) {
+        var _ref17 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12(data) {
           var result;
-          return regeneratorRuntime.wrap(function _callee11$(_context11) {
+          return regeneratorRuntime.wrap(function _callee12$(_context12) {
             while (1) {
-              switch (_context11.prev = _context11.next) {
+              switch (_context12.prev = _context12.next) {
                 case 0:
-                  _context11.next = 2;
+                  _context12.next = 2;
                   return _this7.dashup.action({
                     type: 'page',
                     page: _this7.get('_id'),
@@ -10637,19 +10664,19 @@ var DashupPage = /*#__PURE__*/function (_Base) {
                   }, 'form.submit', data);
 
                 case 2:
-                  result = _context11.sent;
-                  return _context11.abrupt("return", new DashupModel(result, _this7.dashup));
+                  result = _context12.sent;
+                  return _context12.abrupt("return", new DashupModel(result, _this7.dashup));
 
                 case 4:
                 case "end":
-                  return _context11.stop();
+                  return _context12.stop();
               }
             }
-          }, _callee11);
+          }, _callee12);
         }));
 
         return function (_x13) {
-          return _ref16.apply(this, arguments);
+          return _ref17.apply(this, arguments);
         };
       }(); // query and dones
 

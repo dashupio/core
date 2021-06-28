@@ -412,6 +412,17 @@ export default class DashupPage extends Base {
         return accum + this.cart.get(`products.${key}.count`);
       }, 0);
     };
+    this.clear = async () => {
+      // call on dashup
+      const result = await this.rpc('cart.clear');
+
+      // set cart
+      setCart(result);
+      this.emit('cart', this.cart);
+
+      // return user
+      return this.cart;
+    };
     this.remove = async (product, opts = {}) => {
       // call on dashup
       const result = await this.rpc('cart.remove', {
