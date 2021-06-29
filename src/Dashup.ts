@@ -68,7 +68,7 @@ export default class Dashup extends Base {
     if (!this.sessionID) this.sessionID = uuid();
 
     // Run socket
-    this.socket = this.__opts.connection || io.connect(`${this.__opts.url || 'https://dashup.io'}?api=v1${this.__opts.key ? `&key=${this.__opts.key}` : ''}&session=${this.sessionID}`, this.__opts.socket || {});
+    this.socket = this.__opts.connection || (this.__opts.io || io).connect(`${this.__opts.url || 'https://dashup.io'}?api=v1${this.__opts.key ? `&key=${this.__opts.key}` : ''}&session=${this.sessionID}`, this.__opts.socket || {});
 
     // await connected
     const done = new Promise(resolve => this.once('_id', resolve));
