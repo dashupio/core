@@ -1,7 +1,7 @@
 {
   "name": "@dashup/core",
   "description": "nothing yet",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "source": "src/index.ts",
@@ -36,7 +36,7 @@
     "react": "^17.0.2",
     "dot-prop": "^6.0.0",
     "react-dom": "^17.0.2",
-    "@dashup/view": "0.0.7",
+    "@dashup/view": "^0.0.8",
     "socket.io-client": "^4.1.2"
   }
 }
