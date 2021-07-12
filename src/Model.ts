@@ -8,9 +8,12 @@ export default class DashupModel extends Base {
   /**
    * construct module
    */
-  constructor(...args) {
+  constructor(data = {}, dashup, type = 'model') {
     // run super
-    super(...args);
+    super(data, dashup);
+
+    // set type
+    this.type = type;
 
     // bind methods
     this.save = this.save.bind(this);
@@ -49,7 +52,7 @@ export default class DashupModel extends Base {
     const sanitisedData = this.sanitise();
 
     // save model
-    const result = await this.dashup.rpc(this.get('_meta'), 'model.update', this.get('_id'), sanitisedData);
+    const result = await this.dashup.rpc(this.get('_meta'), `${this.type}.update`, this.get('_id'), sanitisedData);
 
     // loop
     Object.keys(result).forEach((key) => {
@@ -66,7 +69,7 @@ export default class DashupModel extends Base {
    */
   async remove() {
     // save model
-    await this.dashup.rpc(this.get('_meta'), 'model.remove', this.get('_id'));
+    await this.dashup.rpc(this.get('_meta'), `${this.type}.remove`, this.get('_id'));
 
     // set data
     return this;

@@ -1,16 +1,27 @@
 // import model
 import uuid from 'shortid';
+import Page from '../Page';
 import Model from '../Model';
+import Section from '../Section';
 import DashupArray from './Array';
+
+// model
+const models = {
+  page    : Page,
+  model   : Model,
+  friend  : Model,
+  section : Section,
+};
 
 // create dashup base class
 export default class DashupQuery {
   /**
    * construct dashup query
    */
-  constructor(page, dashup) {
+  constructor(page, dashup, type = 'model') {
     // set module
     this.page = page;
+    this.type = type;
     this.query = [];
     this.dashup = dashup;
 
@@ -34,18 +45,18 @@ export default class DashupQuery {
         this.query.push([method, args]);
 
         // call
-        const data = await this.dashup.rpc({
+        const data = await this.dashup.rpc(this.page ? {
           type   : 'page',
           page   : this.page,
           struct : this.page,
-        }, 'model.query', this.query);
+        } : null, `${type}.query`, this.query);
 
         // return types
         if (Array.isArray(data)) {
-          return data.map((item) => (item && item._id ? new Model(item, this.dashup) : item));
+          return data.map((item) => (item && item._id ? new models[this.type || 'model'](item, this.dashup, this.type) : item));
         }
         if (data && typeof data === 'object') {
-          return data._id ? new Model(data, this.dashup) : data;
+          return data._id ? new models[this.type || 'model'](data, this.dashup, this.type) : data;
         }
 
         // return data
@@ -92,7 +103,7 @@ export default class DashupQuery {
           });
         } else {
           // push
-          arr.push(new Model(item, this.dashup));
+          arr.push(new models[this.type || 'model'](item, this.dashup, this.type));
         }
 
         // remove unwanted
@@ -127,16 +138,16 @@ export default class DashupQuery {
         this.query.push([proxies[listens.indexOf(method)], args]);
 
         // call
-        const data = await this.dashup.rpc({
+        const data = await this.dashup.rpc(this.page ? {
           type   : 'page',
           page   : this.page,
           struct : this.page,
-        }, 'model.query', this.query, listenID);
+        } : null, `${this.type}.query`, this.query, listenID);
 
         // return types
         if (Array.isArray(data)) {
           // create listenable array
-          arr = new DashupArray(...(data.map((item) => new Model(item, this.dashup))));
+          arr = new DashupArray(...(data.map((item) => new models[this.type || 'model'](item, this.dashup, this.type))));
 
           // set opts
           arr.set('page', this.page);
@@ -148,7 +159,7 @@ export default class DashupQuery {
         }
         if (data && typeof data === 'object') {
           // set model
-          model = new Model(data, this.dashup);
+          model = new models[this.type || 'model'](data, this.dashup, this.type);
 
           // set listen
           model.set('_meta.listen', listenID);
