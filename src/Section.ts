@@ -43,4 +43,32 @@ export default class DashupSection extends Base {
     // return page
     return page;
   }
+
+  /**
+   * get opts
+   */
+  async save() {
+    // sanitise
+    const sanitisedData = {
+      type   : this.get('type'),
+      data   : this.get('data'),
+      user   : this.get('user'),
+      color  : this.get('color'),
+      title  : this.get('title'),
+      order  : this.get('order'),
+      parent : this.get('parent'),
+    };
+
+    // save model
+    const result = await this.dashup.rpc({}, 'section.update', this.get('_id'), sanitisedData);
+
+    // loop
+    Object.keys(result).forEach((key) => {
+      // set
+      this.set(key, result[key]);
+    });
+
+    // set data
+    return this;
+  }
 }
