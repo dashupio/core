@@ -2955,7 +2955,10 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
   }, {
     key: "page",
-    value: function page(id, value) {
+    value: function page() {
+      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var value = arguments.length > 1 ? arguments[1] : undefined;
+
       // set value
       if (id && value) {
         // set
@@ -2983,7 +2986,10 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
   }, {
     key: "section",
-    value: function section(id, value) {
+    value: function section() {
+      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var value = arguments.length > 1 ? arguments[1] : undefined;
+
       // set value
       if (id && value) {
         // set
@@ -3136,6 +3142,16 @@ var Dashup = /*#__PURE__*/function (_Base) {
     get: function get() {
       // return opts
       return DashupModel;
+    }
+    /**
+     * get opts
+     */
+
+  }, {
+    key: "Query",
+    get: function get() {
+      // return opts
+      return DashupQuery;
     }
     /**
      * get opts

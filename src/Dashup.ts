@@ -7,6 +7,9 @@ import cookie from 'js-cookie';
 
 // require page
 import Base from './util/Base';
+import Query from './util/Query';
+
+// require sections
 import Page from './Page';
 import Model from './Model';
 import Section from './Section';
@@ -262,7 +265,7 @@ export default class Dashup extends Base {
   /**
    * get opts
    */
-  page(id, value) {
+  page(id = '', value) {
     // set value
     if (id && value) {
       // set
@@ -288,7 +291,7 @@ export default class Dashup extends Base {
   /**
    * get opts
    */
-  section(id, value) {
+  section(id = '', value) {
     // set value
     if (id && value) {
       // set
@@ -416,6 +419,14 @@ export default class Dashup extends Base {
   get Model() {
     // return opts
     return Model;
+  }
+
+  /**
+   * get opts
+   */
+  get Query() {
+    // return opts
+    return Query;
   }
 
   /**
