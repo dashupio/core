@@ -2856,11 +2856,13 @@ var Dashup = /*#__PURE__*/function (_Base) {
                 // create id
                 id = shortid(); // create promise
 
-                res = new Promise(function (resolve) {
+                res = new Promise(function (resolve, reject) {
                   // socket
                   _this3.socket.once(id, function (result) {
-                    // resolve
-                    resolve(result);
+                    // check result
+                    if (!(result || {}).success) return reject((result || {}).message || 'null'); // resolve
+
+                    resolve(result.date);
                   });
                 }); // call join
 
@@ -3023,8 +3025,10 @@ var Dashup = /*#__PURE__*/function (_Base) {
                 res = new Promise(function (resolve) {
                   // socket
                   _this5.socket.once(id, function (result) {
-                    // resolve
-                    resolve(result);
+                    // check result
+                    if (!(result || {}).success) return reject((result || {}).message || 'null'); // resolve
+
+                    resolve(result.date);
                   });
                 }); // call join
 

@@ -158,11 +158,14 @@ export default class Dashup extends Base {
     const id = uuid();
 
     // create promise
-    const res = new Promise((resolve) => {
+    const res = new Promise((resolve, reject) => {
       // socket
       this.socket.once(id, (result) => {
+        // check result
+        if (!(result || {}).success) return reject((result || {}).message || 'null');
+
         // resolve
-        resolve(result);
+        resolve(result.date);
       });
     });
 
@@ -239,8 +242,11 @@ export default class Dashup extends Base {
     const res = new Promise((resolve) => {
       // socket
       this.socket.once(id, (result) => {
+        // check result
+        if (!(result || {}).success) return reject((result || {}).message || 'null');
+
         // resolve
-        resolve(result);
+        resolve(result.date);
       });
     });
 
