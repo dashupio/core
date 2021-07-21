@@ -3441,15 +3441,13 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
   }, {
     key: "rpc",
-    value: function rpc() {
-      var _this$duRPC;
-
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
+    value: function rpc(opts, name) {
+      for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+        args[_key - 2] = arguments[_key];
       }
 
       // await rpc
-      return (_this$duRPC = this.duRPC).call.apply(_this$duRPC, [{}, 'rpc'].concat(args));
+      return this.duRPC.call({}, 'rpc', opts, name, args);
     }
     /**
      * creates call to namespaced methods
@@ -3460,15 +3458,13 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
   }, {
     key: "hook",
-    value: function hook() {
-      var _this$duRPC2;
-
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
+    value: function hook(opts, name) {
+      for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
       }
 
       // await rpc
-      return (_this$duRPC2 = this.duRPC).call.apply(_this$duRPC2, [{}, 'hook'].concat(args));
+      return this.duRPC.call({}, 'hook', opts, name, args);
     }
     /**
      * creates call to namespaced methods
@@ -3479,15 +3475,13 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
   }, {
     key: "event",
-    value: function event() {
-      var _this$duRPC3;
-
-      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        args[_key3] = arguments[_key3];
+    value: function event(opts, name) {
+      for (var _len3 = arguments.length, args = new Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
+        args[_key3 - 2] = arguments[_key3];
       }
 
       // await rpc
-      return (_this$duRPC3 = this.duRPC).call.apply(_this$duRPC3, [{}, 'event'].concat(args));
+      return this.duRPC.call({}, 'event', opts, name, args);
     }
     /**
      * creates call to namespaced methods
@@ -3498,15 +3492,13 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
   }, {
     key: "action",
-    value: function action() {
-      var _this$duRPC4;
-
-      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        args[_key4] = arguments[_key4];
+    value: function action(opts, name) {
+      for (var _len4 = arguments.length, args = new Array(_len4 > 2 ? _len4 - 2 : 0), _key4 = 2; _key4 < _len4; _key4++) {
+        args[_key4 - 2] = arguments[_key4];
       }
 
       // await rpc
-      return (_this$duRPC4 = this.duRPC).call.apply(_this$duRPC4, [{}, 'action'].concat(args));
+      return this.duRPC.call({}, 'action', opts, name, args);
     } // //////////////////////////////////////////////////////////////////////
     //
     // SUB METHODS

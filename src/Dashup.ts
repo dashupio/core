@@ -155,9 +155,9 @@ export default class Dashup extends Base {
    * @param {*} route
    * @param {*} body
    */
-  rpc(...args) {
+  rpc(opts, name, ...args) {
     // await rpc
-    return this.duRPC.call({}, 'rpc', ...args);
+    return this.duRPC.call({}, 'rpc', opts, name, args);
   }
 
   /**
@@ -166,9 +166,9 @@ export default class Dashup extends Base {
    * @param {*} route
    * @param {*} body
    */
-  hook(...args) {
+  hook(opts, name, ...args) {
     // await rpc
-    return this.duRPC.call({}, 'hook', ...args);
+    return this.duRPC.call({}, 'hook', opts, name, args);
   }
 
   /**
@@ -177,9 +177,9 @@ export default class Dashup extends Base {
    * @param {*} route
    * @param {*} body
    */
-  event(...args) {
+  event(opts, name, ...args) {
     // await rpc
-    return this.duRPC.call({}, 'event', ...args);
+    return this.duRPC.call({}, 'event', opts, name, args);
   }
 
   /**
@@ -188,9 +188,9 @@ export default class Dashup extends Base {
    * @param {*} route
    * @param {*} body
    */
-  action(...args) {
+  action(opts, name, ...args) {
     // await rpc
-    return this.duRPC.call({}, 'action', ...args);
+    return this.duRPC.call({}, 'action', opts, name, args);
   }
 
 
