@@ -2862,7 +2862,7 @@ var Dashup = /*#__PURE__*/function (_Base) {
                     // check result
                     if (!(result || {}).success) return reject((result || {}).message || 'null'); // resolve
 
-                    resolve(result.date);
+                    resolve(result.data);
                   });
                 }); // call join
 
