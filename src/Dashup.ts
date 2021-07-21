@@ -246,7 +246,7 @@ export default class Dashup extends Base {
         if (!(result || {}).success) return reject((result || {}).message || 'null');
 
         // resolve
-        resolve(result.date);
+        resolve(result.data);
       });
     });
 
