@@ -239,7 +239,7 @@ export default class Dashup extends Base {
     const id = uuid();
 
     // create promise
-    const res = new Promise((resolve) => {
+    const res = new Promise((resolve, reject) => {
       // socket
       this.socket.once(id, (result) => {
         // check result

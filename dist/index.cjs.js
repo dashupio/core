@@ -3032,7 +3032,7 @@ var Dashup = /*#__PURE__*/function (_Base) {
                 // create id
                 id = shortid(); // create promise
 
-                res = new Promise(function (resolve) {
+                res = new Promise(function (resolve, reject) {
                   // socket
                   _this5.socket.once(id, function (result) {
                     // check result
