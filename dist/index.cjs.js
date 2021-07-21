@@ -3,8 +3,8 @@
 require('@babel/polyfill');
 var io = require('socket.io-client');
 var View = require('@dashup/view');
-var dotProp = require('dot-prop');
 var events = require('events');
+var dotProp = require('dot-prop');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -70,7 +70,7 @@ function _typeof(obj) {
   return _typeof(obj);
 }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -86,7 +86,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator(fn) {
+function _asyncToGenerator$1(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -94,11 +94,11 @@ function _asyncToGenerator(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -106,13 +106,13 @@ function _asyncToGenerator(fn) {
   };
 }
 
-function _classCallCheck(instance, Constructor) {
+function _classCallCheck$1(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties(target, props) {
+function _defineProperties$1(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -122,9 +122,9 @@ function _defineProperties(target, props) {
   }
 }
 
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
+function _createClass$1(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$1(Constructor, staticProps);
   return Constructor;
 }
 
@@ -143,7 +143,7 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-function _inherits(subClass, superClass) {
+function _inherits$1(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -155,26 +155,26 @@ function _inherits(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf(subClass, superClass);
+  if (superClass) _setPrototypeOf$1(subClass, superClass);
 }
 
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf$1(o) {
+  _getPrototypeOf$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf(o);
+  return _getPrototypeOf$1(o);
 }
 
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$1(o, p) {
+  _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf(o, p);
+  return _setPrototypeOf$1(o, p);
 }
 
-function _isNativeReflectConstruct() {
+function _isNativeReflectConstruct$1() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
   if (Reflect.construct.sham) return false;
   if (typeof Proxy === "function") return true;
@@ -188,7 +188,7 @@ function _isNativeReflectConstruct() {
 }
 
 function _construct(Parent, args, Class) {
-  if (_isNativeReflectConstruct()) {
+  if (_isNativeReflectConstruct$1()) {
     _construct = Reflect.construct;
   } else {
     _construct = function _construct(Parent, args, Class) {
@@ -196,7 +196,7 @@ function _construct(Parent, args, Class) {
       a.push.apply(a, args);
       var Constructor = Function.bind.apply(Parent, a);
       var instance = new Constructor();
-      if (Class) _setPrototypeOf(instance, Class.prototype);
+      if (Class) _setPrototypeOf$1(instance, Class.prototype);
       return instance;
     };
   }
@@ -225,7 +225,7 @@ function _wrapNativeSuper(Class) {
     }
 
     function Wrapper() {
-      return _construct(Class, arguments, _getPrototypeOf(this).constructor);
+      return _construct(Class, arguments, _getPrototypeOf$1(this).constructor);
     }
 
     Wrapper.prototype = Object.create(Class.prototype, {
@@ -236,13 +236,13 @@ function _wrapNativeSuper(Class) {
         configurable: true
       }
     });
-    return _setPrototypeOf(Wrapper, Class);
+    return _setPrototypeOf$1(Wrapper, Class);
   };
 
   return _wrapNativeSuper(Class);
 }
 
-function _assertThisInitialized(self) {
+function _assertThisInitialized$1(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -250,36 +250,36 @@ function _assertThisInitialized(self) {
   return self;
 }
 
-function _possibleConstructorReturn(self, call) {
+function _possibleConstructorReturn$1(self, call) {
   if (call && (typeof call === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized(self);
+  return _assertThisInitialized$1(self);
 }
 
-function _createSuper(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+function _createSuper$1(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct$1();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf(Derived),
+    var Super = _getPrototypeOf$1(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf(this).constructor;
+      var NewTarget = _getPrototypeOf$1(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn(this, result);
+    return _possibleConstructorReturn$1(this, result);
   };
 }
 
 function _superPropBase(object, property) {
   while (!Object.prototype.hasOwnProperty.call(object, property)) {
-    object = _getPrototypeOf(object);
+    object = _getPrototypeOf$1(object);
     if (object === null) break;
   }
 
@@ -382,58 +382,58 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-function createCommonjsModule(fn, module) {
+function createCommonjsModule$1(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
 // Based on The Central Randomizer 1.3 (C) 1997 by Paul Houle (houle@msc.cornell.edu)
 
-var seed = 1;
+var seed$1 = 1;
 /**
  * return a random number based on a seed
  * @param seed
  * @returns {number}
  */
 
-function getNextValue() {
-  seed = (seed * 9301 + 49297) % 233280;
-  return seed / 233280.0;
+function getNextValue$1() {
+  seed$1 = (seed$1 * 9301 + 49297) % 233280;
+  return seed$1 / 233280.0;
 }
 
-function setSeed$1(_seed_) {
-  seed = _seed_;
+function setSeed$3(_seed_) {
+  seed$1 = _seed_;
 }
 
-var randomFromSeed = {
-  nextValue: getNextValue,
-  seed: setSeed$1
+var randomFromSeed$1 = {
+  nextValue: getNextValue$1,
+  seed: setSeed$3
 };
 
-var ORIGINAL = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
-var alphabet;
-var previousSeed;
-var shuffled;
+var ORIGINAL$1 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
+var alphabet$1;
+var previousSeed$1;
+var shuffled$1;
 
-function reset() {
-  shuffled = false;
+function reset$1() {
+  shuffled$1 = false;
 }
 
-function setCharacters(_alphabet_) {
+function setCharacters$1(_alphabet_) {
   if (!_alphabet_) {
-    if (alphabet !== ORIGINAL) {
-      alphabet = ORIGINAL;
-      reset();
+    if (alphabet$1 !== ORIGINAL$1) {
+      alphabet$1 = ORIGINAL$1;
+      reset$1();
     }
 
     return;
   }
 
-  if (_alphabet_ === alphabet) {
+  if (_alphabet_ === alphabet$1) {
     return;
   }
 
-  if (_alphabet_.length !== ORIGINAL.length) {
-    throw new Error('Custom alphabet for shortid must be ' + ORIGINAL.length + ' unique characters. You submitted ' + _alphabet_.length + ' characters: ' + _alphabet_);
+  if (_alphabet_.length !== ORIGINAL$1.length) {
+    throw new Error('Custom alphabet for shortid must be ' + ORIGINAL$1.length + ' unique characters. You submitted ' + _alphabet_.length + ' characters: ' + _alphabet_);
   }
 
   var unique = _alphabet_.split('').filter(function (item, ind, arr) {
@@ -441,39 +441,39 @@ function setCharacters(_alphabet_) {
   });
 
   if (unique.length) {
-    throw new Error('Custom alphabet for shortid must be ' + ORIGINAL.length + ' unique characters. These characters were not unique: ' + unique.join(', '));
+    throw new Error('Custom alphabet for shortid must be ' + ORIGINAL$1.length + ' unique characters. These characters were not unique: ' + unique.join(', '));
   }
 
-  alphabet = _alphabet_;
-  reset();
+  alphabet$1 = _alphabet_;
+  reset$1();
 }
 
-function characters(_alphabet_) {
-  setCharacters(_alphabet_);
-  return alphabet;
+function characters$1(_alphabet_) {
+  setCharacters$1(_alphabet_);
+  return alphabet$1;
 }
 
-function setSeed(seed) {
-  randomFromSeed.seed(seed);
+function setSeed$2(seed) {
+  randomFromSeed$1.seed(seed);
 
-  if (previousSeed !== seed) {
-    reset();
-    previousSeed = seed;
+  if (previousSeed$1 !== seed) {
+    reset$1();
+    previousSeed$1 = seed;
   }
 }
 
-function shuffle() {
-  if (!alphabet) {
-    setCharacters(ORIGINAL);
+function shuffle$1() {
+  if (!alphabet$1) {
+    setCharacters$1(ORIGINAL$1);
   }
 
-  var sourceArray = alphabet.split('');
+  var sourceArray = alphabet$1.split('');
   var targetArray = [];
-  var r = randomFromSeed.nextValue();
+  var r = randomFromSeed$1.nextValue();
   var characterIndex;
 
   while (sourceArray.length > 0) {
-    r = randomFromSeed.nextValue();
+    r = randomFromSeed$1.nextValue();
     characterIndex = Math.floor(r * sourceArray.length);
     targetArray.push(sourceArray.splice(characterIndex, 1)[0]);
   }
@@ -481,13 +481,13 @@ function shuffle() {
   return targetArray.join('');
 }
 
-function getShuffled() {
-  if (shuffled) {
-    return shuffled;
+function getShuffled$1() {
+  if (shuffled$1) {
+    return shuffled$1;
   }
 
-  shuffled = shuffle();
-  return shuffled;
+  shuffled$1 = shuffle$1();
+  return shuffled$1;
 }
 /**
  * lookup shuffled letter
@@ -496,29 +496,29 @@ function getShuffled() {
  */
 
 
-function lookup(index) {
-  var alphabetShuffled = getShuffled();
+function lookup$1(index) {
+  var alphabetShuffled = getShuffled$1();
   return alphabetShuffled[index];
 }
 
-function get() {
-  return alphabet || ORIGINAL;
+function get$1() {
+  return alphabet$1 || ORIGINAL$1;
 }
 
-var alphabet_1 = {
-  get: get,
-  characters: characters,
-  seed: setSeed,
-  lookup: lookup,
-  shuffled: getShuffled
+var alphabet_1$1 = {
+  get: get$1,
+  characters: characters$1,
+  seed: setSeed$2,
+  lookup: lookup$1,
+  shuffled: getShuffled$1
 };
 
-var crypto = typeof window === 'object' && (window.crypto || window.msCrypto); // IE 11 uses window.msCrypto
+var crypto$1 = typeof window === 'object' && (window.crypto || window.msCrypto); // IE 11 uses window.msCrypto
 
-var randomByte;
+var randomByte$1;
 
-if (!crypto || !crypto.getRandomValues) {
-  randomByte = function (size) {
+if (!crypto$1 || !crypto$1.getRandomValues) {
+  randomByte$1 = function (size) {
     var bytes = [];
 
     for (var i = 0; i < size; i++) {
@@ -528,16 +528,16 @@ if (!crypto || !crypto.getRandomValues) {
     return bytes;
   };
 } else {
-  randomByte = function (size) {
-    return crypto.getRandomValues(new Uint8Array(size));
+  randomByte$1 = function (size) {
+    return crypto$1.getRandomValues(new Uint8Array(size));
   };
 }
 
-var randomByteBrowser = randomByte;
+var randomByteBrowser$1 = randomByte$1;
 
 // This file replaces `format.js` in bundlers like webpack or Rollup,
 // according to `browser` config in `package.json`.
-var format_browser = function (random, alphabet, size) {
+var format_browser$1 = function (random, alphabet, size) {
   // We can’t use bytes bigger than the alphabet. To make bytes values closer
   // to the alphabet, we apply bitmask on them. We look for the closest
   // `2 ** x - 1` number, which will be bigger than alphabet size. If we have
@@ -573,13 +573,13 @@ var format_browser = function (random, alphabet, size) {
   }
 };
 
-function generate(number) {
+function generate$1(number) {
   var loopCounter = 0;
   var done;
   var str = '';
 
   while (!done) {
-    str = str + format_browser(randomByteBrowser, alphabet_1.get(), 1);
+    str = str + format_browser$1(randomByteBrowser$1, alphabet_1$1.get(), 1);
     done = number < Math.pow(16, loopCounter + 1);
     loopCounter++;
   }
@@ -587,61 +587,61 @@ function generate(number) {
   return str;
 }
 
-var generate_1 = generate;
+var generate_1$1 = generate$1;
 
 // This number should be updated every year or so to keep the generated id short.
 // To regenerate `new Date() - 0` and bump the version. Always bump the version!
 
 
-var REDUCE_TIME = 1567752802062; // don't change unless we change the algos or REDUCE_TIME
+var REDUCE_TIME$1 = 1567752802062; // don't change unless we change the algos or REDUCE_TIME
 // must be an integer and less than 16
 
-var version = 7; // Counter is used when shortid is called multiple times in one second.
+var version$1 = 7; // Counter is used when shortid is called multiple times in one second.
 
-var counter; // Remember the last time shortid was called in case counter is needed.
+var counter$1; // Remember the last time shortid was called in case counter is needed.
 
-var previousSeconds;
+var previousSeconds$1;
 /**
  * Generate unique id
  * Returns string id
  */
 
-function build(clusterWorkerId) {
+function build$1(clusterWorkerId) {
   var str = '';
-  var seconds = Math.floor((Date.now() - REDUCE_TIME) * 0.001);
+  var seconds = Math.floor((Date.now() - REDUCE_TIME$1) * 0.001);
 
-  if (seconds === previousSeconds) {
-    counter++;
+  if (seconds === previousSeconds$1) {
+    counter$1++;
   } else {
-    counter = 0;
-    previousSeconds = seconds;
+    counter$1 = 0;
+    previousSeconds$1 = seconds;
   }
 
-  str = str + generate_1(version);
-  str = str + generate_1(clusterWorkerId);
+  str = str + generate_1$1(version$1);
+  str = str + generate_1$1(clusterWorkerId);
 
-  if (counter > 0) {
-    str = str + generate_1(counter);
+  if (counter$1 > 0) {
+    str = str + generate_1$1(counter$1);
   }
 
-  str = str + generate_1(seconds);
+  str = str + generate_1$1(seconds);
   return str;
 }
 
-var build_1 = build;
+var build_1$1 = build$1;
 
-function isShortId(id) {
+function isShortId$1(id) {
   if (!id || typeof id !== 'string' || id.length < 6) {
     return false;
   }
 
-  var nonAlphabetic = new RegExp('[^' + alphabet_1.get().replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&') + ']');
+  var nonAlphabetic = new RegExp('[^' + alphabet_1$1.get().replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&') + ']');
   return !nonAlphabetic.test(id);
 }
 
-var isValid = isShortId;
+var isValid$1 = isShortId$1;
 
-var lib = createCommonjsModule(function (module) {
+var lib$1 = createCommonjsModule$1(function (module) {
   // has a unique value for worker
   // Note: I don't know if this is automatically set when using third
   // party cluster solutions such as pm2.
@@ -655,7 +655,7 @@ var lib = createCommonjsModule(function (module) {
    */
 
   function seed(seedValue) {
-    alphabet_1.seed(seedValue);
+    alphabet_1$1.seed(seedValue);
     return module.exports;
   }
   /**
@@ -679,10 +679,10 @@ var lib = createCommonjsModule(function (module) {
 
   function characters(newCharacters) {
     if (newCharacters !== undefined) {
-      alphabet_1.characters(newCharacters);
+      alphabet_1$1.characters(newCharacters);
     }
 
-    return alphabet_1.shuffled();
+    return alphabet_1$1.shuffled();
   }
   /**
    * Generate unique id
@@ -691,7 +691,7 @@ var lib = createCommonjsModule(function (module) {
 
 
   function generate() {
-    return build_1(clusterWorkerId);
+    return build_1$1(clusterWorkerId);
   } // Export all other functions as properties of the generate function
 
 
@@ -700,17 +700,17 @@ var lib = createCommonjsModule(function (module) {
   module.exports.seed = seed;
   module.exports.worker = worker;
   module.exports.characters = characters;
-  module.exports.isValid = isValid;
+  module.exports.isValid = isValid$1;
 });
-lib.generate;
-lib.seed;
-lib.worker;
-lib.characters;
-lib.isValid;
+lib$1.generate;
+lib$1.seed;
+lib$1.worker;
+lib$1.characters;
+lib$1.isValid;
 
-var shortid = lib;
+var shortid$1 = lib$1;
 
-var js_cookie = createCommonjsModule(function (module, exports) {
+var js_cookie = createCommonjsModule$1(function (module, exports) {
 
   (function (factory) {
     var registeredInModuleLoader;
@@ -873,6 +873,608 @@ var js_cookie = createCommonjsModule(function (module, exports) {
   });
 });
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function createCommonjsModule(fn, module) {
+  return module = {
+    exports: {}
+  }, fn(module, module.exports), module.exports;
+} // Found this seed-based random generator somewhere
+// Based on The Central Randomizer 1.3 (C) 1997 by Paul Houle (houle@msc.cornell.edu)
+
+
+var seed = 1;
+/**
+ * return a random number based on a seed
+ * @param seed
+ * @returns {number}
+ */
+
+function getNextValue() {
+  seed = (seed * 9301 + 49297) % 233280;
+  return seed / 233280.0;
+}
+
+function setSeed$1(_seed_) {
+  seed = _seed_;
+}
+
+var randomFromSeed = {
+  nextValue: getNextValue,
+  seed: setSeed$1
+};
+var ORIGINAL = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
+var alphabet;
+var previousSeed;
+var shuffled;
+
+function reset() {
+  shuffled = false;
+}
+
+function setCharacters(_alphabet_) {
+  if (!_alphabet_) {
+    if (alphabet !== ORIGINAL) {
+      alphabet = ORIGINAL;
+      reset();
+    }
+
+    return;
+  }
+
+  if (_alphabet_ === alphabet) {
+    return;
+  }
+
+  if (_alphabet_.length !== ORIGINAL.length) {
+    throw new Error('Custom alphabet for shortid must be ' + ORIGINAL.length + ' unique characters. You submitted ' + _alphabet_.length + ' characters: ' + _alphabet_);
+  }
+
+  var unique = _alphabet_.split('').filter(function (item, ind, arr) {
+    return ind !== arr.lastIndexOf(item);
+  });
+
+  if (unique.length) {
+    throw new Error('Custom alphabet for shortid must be ' + ORIGINAL.length + ' unique characters. These characters were not unique: ' + unique.join(', '));
+  }
+
+  alphabet = _alphabet_;
+  reset();
+}
+
+function characters(_alphabet_) {
+  setCharacters(_alphabet_);
+  return alphabet;
+}
+
+function setSeed(seed) {
+  randomFromSeed.seed(seed);
+
+  if (previousSeed !== seed) {
+    reset();
+    previousSeed = seed;
+  }
+}
+
+function shuffle() {
+  if (!alphabet) {
+    setCharacters(ORIGINAL);
+  }
+
+  var sourceArray = alphabet.split('');
+  var targetArray = [];
+  var r = randomFromSeed.nextValue();
+  var characterIndex;
+
+  while (sourceArray.length > 0) {
+    r = randomFromSeed.nextValue();
+    characterIndex = Math.floor(r * sourceArray.length);
+    targetArray.push(sourceArray.splice(characterIndex, 1)[0]);
+  }
+
+  return targetArray.join('');
+}
+
+function getShuffled() {
+  if (shuffled) {
+    return shuffled;
+  }
+
+  shuffled = shuffle();
+  return shuffled;
+}
+/**
+ * lookup shuffled letter
+ * @param index
+ * @returns {string}
+ */
+
+
+function lookup(index) {
+  var alphabetShuffled = getShuffled();
+  return alphabetShuffled[index];
+}
+
+function get() {
+  return alphabet || ORIGINAL;
+}
+
+var alphabet_1 = {
+  get: get,
+  characters: characters,
+  seed: setSeed,
+  lookup: lookup,
+  shuffled: getShuffled
+};
+var crypto = typeof window === 'object' && (window.crypto || window.msCrypto); // IE 11 uses window.msCrypto
+
+var randomByte;
+
+if (!crypto || !crypto.getRandomValues) {
+  randomByte = function (size) {
+    var bytes = [];
+
+    for (var i = 0; i < size; i++) {
+      bytes.push(Math.floor(Math.random() * 256));
+    }
+
+    return bytes;
+  };
+} else {
+  randomByte = function (size) {
+    return crypto.getRandomValues(new Uint8Array(size));
+  };
+}
+
+var randomByteBrowser = randomByte; // This file replaces `format.js` in bundlers like webpack or Rollup,
+// according to `browser` config in `package.json`.
+
+var format_browser = function (random, alphabet, size) {
+  // We can’t use bytes bigger than the alphabet. To make bytes values closer
+  // to the alphabet, we apply bitmask on them. We look for the closest
+  // `2 ** x - 1` number, which will be bigger than alphabet size. If we have
+  // 30 symbols in the alphabet, we will take 31 (00011111).
+  // We do not use faster Math.clz32, because it is not available in browsers.
+  var mask = (2 << Math.log(alphabet.length - 1) / Math.LN2) - 1; // Bitmask is not a perfect solution (in our example it will pass 31 bytes,
+  // which is bigger than the alphabet). As a result, we will need more bytes,
+  // than ID size, because we will refuse bytes bigger than the alphabet.
+  // Every hardware random generator call is costly,
+  // because we need to wait for entropy collection. This is why often it will
+  // be faster to ask for few extra bytes in advance, to avoid additional calls.
+  // Here we calculate how many random bytes should we call in advance.
+  // It depends on ID length, mask / alphabet size and magic number 1.6
+  // (which was selected according benchmarks).
+  // -~f => Math.ceil(f) if n is float number
+  // -~i => i + 1 if n is integer number
+
+  var step = -~(1.6 * mask * size / alphabet.length);
+  var id = '';
+
+  while (true) {
+    var bytes = random(step); // Compact alternative for `for (var i = 0; i < step; i++)`
+
+    var i = step;
+
+    while (i--) {
+      // If random byte is bigger than alphabet even after bitmask,
+      // we refuse it by `|| ''`.
+      id += alphabet[bytes[i] & mask] || ''; // More compact than `id.length + 1 === size`
+
+      if (id.length === +size) return id;
+    }
+  }
+};
+
+function generate(number) {
+  var loopCounter = 0;
+  var done;
+  var str = '';
+
+  while (!done) {
+    str = str + format_browser(randomByteBrowser, alphabet_1.get(), 1);
+    done = number < Math.pow(16, loopCounter + 1);
+    loopCounter++;
+  }
+
+  return str;
+}
+
+var generate_1 = generate; // Ignore all milliseconds before a certain time to reduce the size of the date entropy without sacrificing uniqueness.
+// This number should be updated every year or so to keep the generated id short.
+// To regenerate `new Date() - 0` and bump the version. Always bump the version!
+
+var REDUCE_TIME = 1567752802062; // don't change unless we change the algos or REDUCE_TIME
+// must be an integer and less than 16
+
+var version = 7; // Counter is used when shortid is called multiple times in one second.
+
+var counter; // Remember the last time shortid was called in case counter is needed.
+
+var previousSeconds;
+/**
+ * Generate unique id
+ * Returns string id
+ */
+
+function build(clusterWorkerId) {
+  var str = '';
+  var seconds = Math.floor((Date.now() - REDUCE_TIME) * 0.001);
+
+  if (seconds === previousSeconds) {
+    counter++;
+  } else {
+    counter = 0;
+    previousSeconds = seconds;
+  }
+
+  str = str + generate_1(version);
+  str = str + generate_1(clusterWorkerId);
+
+  if (counter > 0) {
+    str = str + generate_1(counter);
+  }
+
+  str = str + generate_1(seconds);
+  return str;
+}
+
+var build_1 = build;
+
+function isShortId(id) {
+  if (!id || typeof id !== 'string' || id.length < 6) {
+    return false;
+  }
+
+  var nonAlphabetic = new RegExp('[^' + alphabet_1.get().replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&') + ']');
+  return !nonAlphabetic.test(id);
+}
+
+var isValid = isShortId;
+var lib = createCommonjsModule(function (module) {
+  // if you are using cluster or multiple servers use this to make each instance
+  // has a unique value for worker
+  // Note: I don't know if this is automatically set when using third
+  // party cluster solutions such as pm2.
+  var clusterWorkerId = 0;
+  /**
+   * Set the seed.
+   * Highly recommended if you don't want people to try to figure out your id schema.
+   * exposed as shortid.seed(int)
+   * @param seed Integer value to seed the random alphabet.  ALWAYS USE THE SAME SEED or you might get overlaps.
+   */
+
+  function seed(seedValue) {
+    alphabet_1.seed(seedValue);
+    return module.exports;
+  }
+  /**
+   * Set the cluster worker or machine id
+   * exposed as shortid.worker(int)
+   * @param workerId worker must be positive integer.  Number less than 16 is recommended.
+   * returns shortid module so it can be chained.
+   */
+
+
+  function worker(workerId) {
+    clusterWorkerId = workerId;
+    return module.exports;
+  }
+  /**
+   *
+   * sets new characters to use in the alphabet
+   * returns the shuffled alphabet
+   */
+
+
+  function characters(newCharacters) {
+    if (newCharacters !== undefined) {
+      alphabet_1.characters(newCharacters);
+    }
+
+    return alphabet_1.shuffled();
+  }
+  /**
+   * Generate unique id
+   * Returns string id
+   */
+
+
+  function generate() {
+    return build_1(clusterWorkerId);
+  } // Export all other functions as properties of the generate function
+
+
+  module.exports = generate;
+  module.exports.generate = generate;
+  module.exports.seed = seed;
+  module.exports.worker = worker;
+  module.exports.characters = characters;
+  module.exports.isValid = isValid;
+});
+lib.generate;
+lib.seed;
+lib.worker;
+lib.characters;
+lib.isValid;
+var shortid = lib;
+/**
+ * create dashup RPC class
+ */
+
+var DashupRPC = /*#__PURE__*/function (_EventEmitter) {
+  _inherits(DashupRPC, _EventEmitter);
+
+  var _super = _createSuper(DashupRPC); // constructor
+
+
+  function DashupRPC(socket) {
+    var _this;
+
+    _classCallCheck(this, DashupRPC); // super
+
+
+    _this = _super.call(this); // set socket
+
+    _this.socket = socket; // endpoints
+
+    _this.__endpoints = {}; // add listeners
+
+    _this.socket.on('du.call', /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id, type) {
+        var _this$__endpoints,
+            _len,
+            args,
+            _key,
+            result,
+            _args = arguments;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (_this.__endpoints[type]) {
+                  _context.next = 2;
+                  break;
+                }
+
+                return _context.abrupt("return", _this.socket.emit(id, {
+                  success: false,
+                  message: 'endpoint not found'
+                }));
+
+              case 2:
+                _context.prev = 2;
+
+                for (_len = _args.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+                  args[_key - 2] = _args[_key];
+                }
+
+                _context.next = 6;
+                return (_this$__endpoints = _this.__endpoints)[type].apply(_this$__endpoints, args);
+
+              case 6:
+                result = _context.sent; // return result
+
+                _this.socket.emit(id, {
+                  result: result,
+                  success: true
+                });
+
+                _context.next = 13;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](2); // return result
+
+                _this.socket.emit(id, {
+                  message: _context.t0.toString(),
+                  success: false
+                });
+
+              case 13:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[2, 10]]);
+      }));
+
+      return function (_x, _x2) {
+        return _ref.apply(this, arguments);
+      };
+    }());
+
+    return _this;
+  }
+  /**
+   * call
+   */
+
+
+  _createClass(DashupRPC, [{
+    key: "call",
+    value: function call(_ref2) {
+      var _this2 = this;
+
+      var id = _ref2.id;
+      _ref2.attempts;
+      _ref2.timeout;
+
+      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      } // create id
+
+
+      if (!id) id = shortid(); // return promise
+
+      return new Promise(function (resolve, reject) {
+        var _this2$socket; // calls endpoint on socket
+
+
+        _this2.socket.once(id, function (_ref3) {
+          var result = _ref3.result,
+              message = _ref3.message,
+              success = _ref3.success; // reject with message
+
+          if (!success) return reject(message); // resolve
+
+          resolve(result);
+        });
+
+        (_this2$socket = _this2.socket).emit.apply(_this2$socket, ['du.call', id].concat(args));
+      });
+    }
+    /**
+     * add endpoint
+     */
+
+  }, {
+    key: "endpoint",
+    value: function endpoint(type, fn) {
+      // create endpoint
+      this.__endpoints[type] = fn;
+    }
+  }]);
+
+  return DashupRPC;
+}(events.EventEmitter); // export default
+
 var fastDeepEqual = function equal(a, b) {
   if (a === b) return true;
 
@@ -911,9 +1513,9 @@ var fastDeepEqual = function equal(a, b) {
 };
 
 var DashupBase = /*#__PURE__*/function (_EventEmitter) {
-  _inherits(DashupBase, _EventEmitter);
+  _inherits$1(DashupBase, _EventEmitter);
 
-  var _super = _createSuper(DashupBase);
+  var _super = _createSuper$1(DashupBase);
 
   /**
    * construct dashup base
@@ -926,7 +1528,7 @@ var DashupBase = /*#__PURE__*/function (_EventEmitter) {
     var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var dashup = arguments.length > 1 ? arguments[1] : undefined;
 
-    _classCallCheck(this, DashupBase);
+    _classCallCheck$1(this, DashupBase);
 
     // run super
     _this = _super.call(this); // create data object
@@ -952,7 +1554,7 @@ var DashupBase = /*#__PURE__*/function (_EventEmitter) {
    */
 
 
-  _createClass(DashupBase, [{
+  _createClass$1(DashupBase, [{
     key: "set",
     value: function set(key, value) {
       var _this2 = this;
@@ -1021,9 +1623,9 @@ var DashupBase = /*#__PURE__*/function (_EventEmitter) {
  */
 
 var DashupModel = /*#__PURE__*/function (_Base) {
-  _inherits(DashupModel, _Base);
+  _inherits$1(DashupModel, _Base);
 
-  var _super = _createSuper(DashupModel);
+  var _super = _createSuper$1(DashupModel);
 
   /**
    * construct module
@@ -1035,16 +1637,16 @@ var DashupModel = /*#__PURE__*/function (_Base) {
     var dashup = arguments.length > 1 ? arguments[1] : undefined;
     var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'model';
 
-    _classCallCheck(this, DashupModel);
+    _classCallCheck$1(this, DashupModel);
 
     // run super
     _this = _super.call(this, data, dashup); // set type
 
     _this.type = type; // bind methods
 
-    _this.save = _this.save.bind(_assertThisInitialized(_this));
-    _this.remove = _this.remove.bind(_assertThisInitialized(_this));
-    _this.sanitise = _this.sanitise.bind(_assertThisInitialized(_this));
+    _this.save = _this.save.bind(_assertThisInitialized$1(_this));
+    _this.remove = _this.remove.bind(_assertThisInitialized$1(_this));
+    _this.sanitise = _this.sanitise.bind(_assertThisInitialized$1(_this));
     return _this;
   } // //////////////////////////////////////////////////////////////////////
   //
@@ -1057,7 +1659,7 @@ var DashupModel = /*#__PURE__*/function (_Base) {
    */
 
 
-  _createClass(DashupModel, [{
+  _createClass$1(DashupModel, [{
     key: "set",
     value: function set(key, value) {
       var _this2 = this;
@@ -1072,7 +1674,7 @@ var DashupModel = /*#__PURE__*/function (_Base) {
       } // return parent set
 
 
-      return _get(_getPrototypeOf(DashupModel.prototype), "set", this).call(this, key, value);
+      return _get(_getPrototypeOf$1(DashupModel.prototype), "set", this).call(this, key, value);
     }
     /**
      * get opts
@@ -1081,7 +1683,7 @@ var DashupModel = /*#__PURE__*/function (_Base) {
   }, {
     key: "save",
     value: function () {
-      var _save = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var _save = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var _this3 = this;
 
         var sanitisedData, result;
@@ -1126,7 +1728,7 @@ var DashupModel = /*#__PURE__*/function (_Base) {
   }, {
     key: "remove",
     value: function () {
-      var _remove = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var _remove = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -1235,9 +1837,9 @@ var DashupModel = /*#__PURE__*/function (_Base) {
  */
 
 var DashupPage = /*#__PURE__*/function (_Base) {
-  _inherits(DashupPage, _Base);
+  _inherits$1(DashupPage, _Base);
 
-  var _super = _createSuper(DashupPage);
+  var _super = _createSuper$1(DashupPage);
 
   /**
    * construct dashup section
@@ -1247,7 +1849,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
   function DashupPage() {
     var _this;
 
-    _classCallCheck(this, DashupPage);
+    _classCallCheck$1(this, DashupPage);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -1256,10 +1858,10 @@ var DashupPage = /*#__PURE__*/function (_Base) {
     // run super
     _this = _super.call.apply(_super, [this].concat(args)); // bind functions
 
-    _this.hook = _this.hook.bind(_assertThisInitialized(_this));
-    _this.view = _this.view.bind(_assertThisInitialized(_this));
-    _this.event = _this.event.bind(_assertThisInitialized(_this));
-    _this.action = _this.action.bind(_assertThisInitialized(_this)); // render
+    _this.hook = _this.hook.bind(_assertThisInitialized$1(_this));
+    _this.view = _this.view.bind(_assertThisInitialized$1(_this));
+    _this.event = _this.event.bind(_assertThisInitialized$1(_this));
+    _this.action = _this.action.bind(_assertThisInitialized$1(_this)); // render
 
     if (_this["".concat(_this.get('type'), "Init")]) _this["".concat(_this.get('type'), "Init")]();
     return _this;
@@ -1274,7 +1876,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
    */
 
 
-  _createClass(DashupPage, [{
+  _createClass$1(DashupPage, [{
     key: "set",
     value: function set(key, value) {
       // check type
@@ -1283,7 +1885,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       } // return parent set
 
 
-      return _get(_getPrototypeOf(DashupPage.prototype), "set", this).call(this, key, value);
+      return _get(_getPrototypeOf$1(DashupPage.prototype), "set", this).call(this, key, value);
     }
     /**
      * get opts
@@ -1319,7 +1921,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
   }, {
     key: "save",
     value: function () {
-      var _save = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var _save = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var _this3 = this;
 
         var sanitisedData, result;
@@ -1473,7 +2075,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
   }, {
     key: "view",
     value: function () {
-      var _view2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(selector, _view, opts) {
+      var _view2 = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(selector, _view, opts) {
         var type,
             struct,
             el,
@@ -1534,7 +2136,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       }); // check login
 
       this.login = /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(email, password) {
+        var _ref = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(email, password) {
           var result;
           return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
@@ -1579,7 +2181,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       }();
 
       this.register = /*#__PURE__*/function () {
-        var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(data) {
+        var _ref2 = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(data) {
           var result;
           return regeneratorRuntime.wrap(function _callee4$(_context4) {
             while (1) {
@@ -1620,7 +2222,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
         };
       }();
 
-      this.logout = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+      this.logout = /*#__PURE__*/_asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
@@ -1707,7 +2309,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       }); // check login
 
       this.send = /*#__PURE__*/function () {
-        var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(_ref5) {
+        var _ref6 = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(_ref5) {
           var message, result;
           return regeneratorRuntime.wrap(function _callee6$(_context6) {
             while (1) {
@@ -1741,7 +2343,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       }();
 
       this.create = /*#__PURE__*/function () {
-        var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(data) {
+        var _ref7 = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(data) {
           var result;
           return regeneratorRuntime.wrap(function _callee7$(_context7) {
             while (1) {
@@ -1841,7 +2443,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       }); // cart
 
       this.add = /*#__PURE__*/function () {
-        var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(product) {
+        var _ref9 = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(product) {
           var count,
               opts,
               result,
@@ -1899,7 +2501,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       };
 
       this.code = /*#__PURE__*/function () {
-        var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(discount) {
+        var _ref10 = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(discount) {
           var result;
           return regeneratorRuntime.wrap(function _callee9$(_context9) {
             while (1) {
@@ -1940,7 +2542,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
         }, 0);
       };
 
-      this.clear = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+      this.clear = /*#__PURE__*/_asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
         var result;
         return regeneratorRuntime.wrap(function _callee10$(_context10) {
           while (1) {
@@ -1968,7 +2570,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       }));
 
       this.remove = /*#__PURE__*/function () {
-        var _ref12 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(product) {
+        var _ref12 = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(product) {
           var opts,
               result,
               _args11 = arguments;
@@ -2127,7 +2729,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       this.modelInit(); // check login
 
       this.submit = /*#__PURE__*/function () {
-        var _ref16 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12(data) {
+        var _ref16 = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee12(data) {
           var result;
           return regeneratorRuntime.wrap(function _callee12$(_context12) {
             while (1) {
@@ -2170,7 +2772,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
 
       // create
       this.create = /*#__PURE__*/function () {
-        var _ref17 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee13(data) {
+        var _ref17 = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee13(data) {
           var result;
           return regeneratorRuntime.wrap(function _callee13$(_context13) {
             while (1) {
@@ -2225,9 +2827,9 @@ var DashupPage = /*#__PURE__*/function (_Base) {
  */
 
 var DashupSection = /*#__PURE__*/function (_Base) {
-  _inherits(DashupSection, _Base);
+  _inherits$1(DashupSection, _Base);
 
-  var _super = _createSuper(DashupSection);
+  var _super = _createSuper$1(DashupSection);
 
   /**
    * construct dashup section
@@ -2235,7 +2837,7 @@ var DashupSection = /*#__PURE__*/function (_Base) {
    * @param  {...any} args
    */
   function DashupSection() {
-    _classCallCheck(this, DashupSection);
+    _classCallCheck$1(this, DashupSection);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -2254,7 +2856,7 @@ var DashupSection = /*#__PURE__*/function (_Base) {
    */
 
 
-  _createClass(DashupSection, [{
+  _createClass$1(DashupSection, [{
     key: "page",
     value: function page(id, value) {
       var _this = this;
@@ -2284,7 +2886,7 @@ var DashupSection = /*#__PURE__*/function (_Base) {
   }, {
     key: "save",
     value: function () {
-      var _save = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var _save = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var _this2 = this;
 
         var sanitisedData, result;
@@ -2340,9 +2942,9 @@ var DashupSection = /*#__PURE__*/function (_Base) {
  */
 
 var DashupArray = /*#__PURE__*/function (_Array) {
-  _inherits(DashupArray, _Array);
+  _inherits$1(DashupArray, _Array);
 
-  var _super = _createSuper(DashupArray);
+  var _super = _createSuper$1(DashupArray);
 
   /**
    * create array
@@ -2352,7 +2954,7 @@ var DashupArray = /*#__PURE__*/function (_Array) {
   function DashupArray() {
     var _this;
 
-    _classCallCheck(this, DashupArray);
+    _classCallCheck$1(this, DashupArray);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -2364,9 +2966,9 @@ var DashupArray = /*#__PURE__*/function (_Array) {
     _this.__data = {};
     _this.events = new events.EventEmitter(); // bind
 
-    _this.get = _this.get.bind(_assertThisInitialized(_this));
-    _this.set = _this.set.bind(_assertThisInitialized(_this));
-    _this.deafen = _this.deafen.bind(_assertThisInitialized(_this)); // events methods
+    _this.get = _this.get.bind(_assertThisInitialized$1(_this));
+    _this.set = _this.set.bind(_assertThisInitialized$1(_this));
+    _this.deafen = _this.deafen.bind(_assertThisInitialized$1(_this)); // events methods
 
     ['on', 'emit', 'once', 'removeListener'].forEach(function (method) {
       // bind
@@ -2392,7 +2994,7 @@ var DashupArray = /*#__PURE__*/function (_Array) {
    */
 
 
-  _createClass(DashupArray, [{
+  _createClass$1(DashupArray, [{
     key: "set",
     value: function set(key, value) {
       var _this2 = this;
@@ -2460,7 +3062,7 @@ function DashupQuery(page, dashup) {
 
   var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'model';
 
-  _classCallCheck(this, DashupQuery);
+  _classCallCheck$1(this, DashupQuery);
 
   // set module
   this.page = page;
@@ -2485,7 +3087,7 @@ function DashupQuery(page, dashup) {
 
   ['sum', 'avg', 'count', 'find', 'findOne', 'findById', 'findByIds'].forEach(function (method) {
     // push to query
-    _this[method] = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    _this[method] = /*#__PURE__*/_asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       var _len2,
           args,
           _key2,
@@ -2550,7 +3152,7 @@ function DashupQuery(page, dashup) {
     var model = null;
     var proxies = ['find', 'findById', 'findOne']; // create listen id
 
-    var listenID = shortid(); // create listener
+    var listenID = shortid$1(); // create listener
 
     _this.dashup.socket.on(listenID, function (_ref2) {
       var type = _ref2.type,
@@ -2609,7 +3211,7 @@ function DashupQuery(page, dashup) {
     }); // push to query
 
 
-    _this[method] = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    _this[method] = /*#__PURE__*/_asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
       var _len3,
           args,
           _key3,
@@ -2685,9 +3287,9 @@ function DashupQuery(page, dashup) {
  */
 
 var Dashup = /*#__PURE__*/function (_Base) {
-  _inherits(Dashup, _Base);
+  _inherits$1(Dashup, _Base);
 
-  var _super = _createSuper(Dashup);
+  var _super = _createSuper$1(Dashup);
 
   /**
    * construct Dashup
@@ -2697,7 +3299,7 @@ var Dashup = /*#__PURE__*/function (_Base) {
   function Dashup(opts) {
     var _this;
 
-    _classCallCheck(this, Dashup);
+    _classCallCheck$1(this, Dashup);
 
     // run super
     _this = _super.call(this); // set opts
@@ -2705,11 +3307,11 @@ var Dashup = /*#__PURE__*/function (_Base) {
     _this.__opts = opts || {};
     _this.__version = '0.0.2'; // bind methods
 
-    _this.rpc = _this.rpc.bind(_assertThisInitialized(_this));
-    _this.hook = _this.hook.bind(_assertThisInitialized(_this));
-    _this.event = _this.event.bind(_assertThisInitialized(_this));
-    _this.build = _this.build.bind(_assertThisInitialized(_this));
-    _this.action = _this.action.bind(_assertThisInitialized(_this)); // build
+    _this.rpc = _this.rpc.bind(_assertThisInitialized$1(_this));
+    _this.hook = _this.hook.bind(_assertThisInitialized$1(_this));
+    _this.event = _this.event.bind(_assertThisInitialized$1(_this));
+    _this.build = _this.build.bind(_assertThisInitialized$1(_this));
+    _this.action = _this.action.bind(_assertThisInitialized$1(_this)); // build
 
     _this.building = _this.build();
     return _this;
@@ -2724,10 +3326,10 @@ var Dashup = /*#__PURE__*/function (_Base) {
    */
 
 
-  _createClass(Dashup, [{
+  _createClass$1(Dashup, [{
     key: "build",
     value: function () {
-      var _build = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var _build = _asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var _this2 = this;
 
         var done, classTypes;
@@ -2740,7 +3342,7 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
                 if (!this.sessionID && typeof window !== 'undefined') {
                   // in frontend
-                  this.sessionID = js_cookie.get('dashup-session') || shortid(); // set cookie
+                  this.sessionID = js_cookie.get('dashup-session') || shortid$1(); // set cookie
 
                   js_cookie.set('dashup-session', this.sessionID, {
                     expires: 7
@@ -2748,9 +3350,10 @@ var Dashup = /*#__PURE__*/function (_Base) {
                 } // set session
 
 
-                if (!this.sessionID) this.sessionID = shortid(); // Run socket
+                if (!this.sessionID) this.sessionID = shortid$1(); // Run socket
 
-                this.socket = this.__opts.connection || (this.__opts.io || io__default['default']).connect("".concat(this.__opts.url || 'https://dashup.io', "?api=v1").concat(this.__opts.key ? "&key=".concat(this.__opts.key) : '', "&session=").concat(this.sessionID), this.__opts.socket || {}); // await connected
+                this.socket = this.__opts.connection || (this.__opts.io || io__default['default']).connect("".concat(this.__opts.url || 'https://dashup.io', "?api=v1").concat(this.__opts.key ? "&key=".concat(this.__opts.key) : '', "&session=").concat(this.sessionID), this.__opts.socket || {});
+                this.duRPC = new DashupRPC(this.socket); // await connected
 
                 done = new Promise(function (resolve) {
                   return _this2.once('_id', resolve);
@@ -2822,10 +3425,10 @@ var Dashup = /*#__PURE__*/function (_Base) {
                   _this2.emit('active', _this2.__data.active);
                 }); // await done
 
-                _context.next = 11;
+                _context.next = 12;
                 return done;
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -2848,58 +3451,16 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
   }, {
     key: "rpc",
-    value: function () {
-      var _rpc = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(opts, name) {
-        var _this3 = this;
+    value: function rpc() {
+      var _this$duRPC;
 
-        var id,
-            res,
-            _len,
-            args,
-            _key,
-            _args2 = arguments;
-
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                // create id
-                id = shortid(); // create promise
-
-                res = new Promise(function (resolve, reject) {
-                  // socket
-                  _this3.socket.once(id, function (result) {
-                    // check result
-                    if (!(result || {}).success) return reject((result || {}).message || 'null'); // resolve
-
-                    resolve(result.data);
-                  });
-                }); // call join
-
-                for (_len = _args2.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-                  args[_key - 2] = _args2[_key];
-                }
-
-                this.socket.emit('dashup.rpc', _objectSpread2(_objectSpread2({}, opts), {}, {
-                  id: id
-                }), name, args); // return result
-
-                return _context2.abrupt("return", res);
-
-              case 5:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function rpc(_x, _x2) {
-        return _rpc.apply(this, arguments);
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
       }
 
-      return rpc;
-    }()
+      // await rpc
+      return (_this$duRPC = this.duRPC).call.apply(_this$duRPC, [{}, 'rpc'].concat(args));
+    }
     /**
      * creates call to namespaced methods
      *
@@ -2909,56 +3470,16 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
   }, {
     key: "hook",
-    value: function () {
-      var _hook = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(opts, name) {
-        var _this4 = this;
+    value: function hook() {
+      var _this$duRPC2;
 
-        var id,
-            res,
-            _len2,
-            args,
-            _key2,
-            _args3 = arguments;
-
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                // create id
-                id = shortid(); // create promise
-
-                res = new Promise(function (resolve) {
-                  // socket
-                  _this4.socket.once(id, function (result) {
-                    // resolve
-                    resolve(result);
-                  });
-                }); // call join
-
-                for (_len2 = _args3.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-                  args[_key2 - 2] = _args3[_key2];
-                }
-
-                this.socket.emit('dashup.hook', _objectSpread2(_objectSpread2({}, opts), {}, {
-                  id: id
-                }), name, args); // return result
-
-                return _context3.abrupt("return", res);
-
-              case 5:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function hook(_x3, _x4) {
-        return _hook.apply(this, arguments);
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
       }
 
-      return hook;
-    }()
+      // await rpc
+      return (_this$duRPC2 = this.duRPC).call.apply(_this$duRPC2, [{}, 'hook'].concat(args));
+    }
     /**
      * creates call to namespaced methods
      *
@@ -2968,43 +3489,16 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
   }, {
     key: "event",
-    value: function () {
-      var _event = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(opts, name) {
-        var id,
-            _len3,
-            args,
-            _key3,
-            _args4 = arguments;
+    value: function event() {
+      var _this$duRPC3;
 
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                // create id
-                id = shortid(); // call join
-
-                for (_len3 = _args4.length, args = new Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
-                  args[_key3 - 2] = _args4[_key3];
-                }
-
-                this.socket.emit('dashup.event', _objectSpread2(_objectSpread2({}, opts), {}, {
-                  id: id
-                }), name, args);
-
-              case 3:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function event(_x5, _x6) {
-        return _event.apply(this, arguments);
+      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
       }
 
-      return event;
-    }()
+      // await rpc
+      return (_this$duRPC3 = this.duRPC).call.apply(_this$duRPC3, [{}, 'event'].concat(args));
+    }
     /**
      * creates call to namespaced methods
      *
@@ -3014,58 +3508,16 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
   }, {
     key: "action",
-    value: function () {
-      var _action = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(opts, name) {
-        var _this5 = this;
+    value: function action() {
+      var _this$duRPC4;
 
-        var id,
-            res,
-            _len4,
-            args,
-            _key4,
-            _args5 = arguments;
-
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                // create id
-                id = shortid(); // create promise
-
-                res = new Promise(function (resolve, reject) {
-                  // socket
-                  _this5.socket.once(id, function (result) {
-                    // check result
-                    if (!(result || {}).success) return reject((result || {}).message || 'null'); // resolve
-
-                    resolve(result.data);
-                  });
-                }); // call join
-
-                for (_len4 = _args5.length, args = new Array(_len4 > 2 ? _len4 - 2 : 0), _key4 = 2; _key4 < _len4; _key4++) {
-                  args[_key4 - 2] = _args5[_key4];
-                }
-
-                this.socket.emit('dashup.action', _objectSpread2(_objectSpread2({}, opts), {}, {
-                  id: id
-                }), name, args); // return result
-
-                return _context5.abrupt("return", res);
-
-              case 5:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
-
-      function action(_x7, _x8) {
-        return _action.apply(this, arguments);
+      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        args[_key4] = arguments[_key4];
       }
 
-      return action;
-    }() // //////////////////////////////////////////////////////////////////////
+      // await rpc
+      return (_this$duRPC4 = this.duRPC).call.apply(_this$duRPC4, [{}, 'action'].concat(args));
+    } // //////////////////////////////////////////////////////////////////////
     //
     // SUB METHODS
     //
@@ -3140,7 +3592,7 @@ var Dashup = /*#__PURE__*/function (_Base) {
   }, {
     key: "set",
     value: function set(key, value) {
-      var _this6 = this;
+      var _this3 = this;
 
       // types
       var classTypes = {
@@ -3154,36 +3606,36 @@ var Dashup = /*#__PURE__*/function (_Base) {
         // check type
         if (key === type) {
           // set items map
-          if (!_this6.__data[type]) _this6.__data[type] = new Map(); // loop items
+          if (!_this3.__data[type]) _this3.__data[type] = new Map(); // loop items
 
           value.forEach(function (item) {
             // check item
-            if (_this6.__data[type].has(item._id)) {
+            if (_this3.__data[type].has(item._id)) {
               // current
-              var current = _this6.__data[type].get(item._id); // set value
+              var current = _this3.__data[type].get(item._id); // set value
 
 
               Object.keys(item).forEach(function (key) {
                 return current.set(key, item[key]);
               });
             } else {
-              _this6.__data[type].set(item._id, new classTypes[type](item, _this6));
+              _this3.__data[type].set(item._id, new classTypes[type](item, _this3));
             }
           });
-          Array.from(_this6.__data[type].keys()).forEach(function (id) {
+          Array.from(_this3.__data[type].keys()).forEach(function (id) {
             // delete item
             if (!value.find(function (item) {
               return item._id === id;
-            })) _this6.__data[type]["delete"](id);
+            })) _this3.__data[type]["delete"](id);
           }); // emit
 
-          _this6.emit(type, _this6.__data[type]);
+          _this3.emit(type, _this3.__data[type]);
 
-          _this6.emit('update'); // return items
+          _this3.emit('update'); // return items
 
 
           return {
-            v: _this6.__data[type]
+            v: _this3.__data[type]
           };
         }
       };
@@ -3195,7 +3647,7 @@ var Dashup = /*#__PURE__*/function (_Base) {
       } // return parent set
 
 
-      return _get(_getPrototypeOf(Dashup.prototype), "set", this).call(this, key, value);
+      return _get(_getPrototypeOf$1(Dashup.prototype), "set", this).call(this, key, value);
     }
     /**
      * check can

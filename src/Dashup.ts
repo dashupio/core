@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import uuid from 'shortid';
 import View from '@dashup/view';
 import cookie from 'js-cookie';
+import DashupRPC from '@dashup/rpc';
 
 // require page
 import Base from './util/Base';
@@ -72,6 +73,7 @@ export default class Dashup extends Base {
 
     // Run socket
     this.socket = this.__opts.connection || (this.__opts.io || io).connect(`${this.__opts.url || 'https://dashup.io'}?api=v1${this.__opts.key ? `&key=${this.__opts.key}` : ''}&session=${this.sessionID}`, this.__opts.socket || {});
+    this.duRPC = new DashupRPC(this.socket);
 
     // await connected
     const done = new Promise(resolve => this.once('_id', resolve));
@@ -153,31 +155,9 @@ export default class Dashup extends Base {
    * @param {*} route
    * @param {*} body
    */
-  async rpc(opts, name, ...args) {
-    // create id
-    const id = uuid();
-
-    // create promise
-    const res = new Promise((resolve, reject) => {
-      // socket
-      this.socket.once(id, (result) => {
-        // check result
-        if (!(result || {}).success) return reject((result || {}).message || 'null');
-
-        // resolve
-        resolve(result.data);
-      });
-    });
-
-    // call join
-    this.socket.emit('dashup.rpc', {
-      ...opts,
-
-      id,
-    }, name, args);
-
-    // return result
-    return res;
+  rpc(...args) {
+    // await rpc
+    return this.duRPC.call({}, 'rpc', ...args);
   }
 
   /**
@@ -186,28 +166,9 @@ export default class Dashup extends Base {
    * @param {*} route
    * @param {*} body
    */
-  async hook(opts, name, ...args) {
-    // create id
-    const id = uuid();
-
-    // create promise
-    const res = new Promise((resolve) => {
-      // socket
-      this.socket.once(id, (result) => {
-        // resolve
-        resolve(result);
-      });
-    });
-
-    // call join
-    this.socket.emit('dashup.hook', {
-      ...opts,
-
-      id,
-    }, name, args);
-
-    // return result
-    return res;
+  hook(...args) {
+    // await rpc
+    return this.duRPC.call({}, 'hook', ...args);
   }
 
   /**
@@ -216,16 +177,9 @@ export default class Dashup extends Base {
    * @param {*} route
    * @param {*} body
    */
-  async event(opts, name, ...args) {
-    // create id
-    const id = uuid();
-
-    // call join
-    this.socket.emit('dashup.event', {
-      ...opts,
-
-      id,
-    }, name, args);
+  event(...args) {
+    // await rpc
+    return this.duRPC.call({}, 'event', ...args);
   }
 
   /**
@@ -234,31 +188,9 @@ export default class Dashup extends Base {
    * @param {*} route
    * @param {*} body
    */
-  async action(opts, name, ...args) {
-    // create id
-    const id = uuid();
-
-    // create promise
-    const res = new Promise((resolve, reject) => {
-      // socket
-      this.socket.once(id, (result) => {
-        // check result
-        if (!(result || {}).success) return reject((result || {}).message || 'null');
-
-        // resolve
-        resolve(result.data);
-      });
-    });
-
-    // call join
-    this.socket.emit('dashup.action', {
-      ...opts,
-
-      id,
-    }, name, args);
-
-    // return result
-    return res;
+  action(...args) {
+    // await rpc
+    return this.duRPC.call({}, 'action', ...args);
   }
 
 
