@@ -3196,7 +3196,7 @@ function DashupQuery(page, dashup) {
         return 0;
       }); // check if find
 
-      arr.emit('update');
+      arr.emit('update', item);
       arr.emit(type, item, hash);
     }); // push to query
 
