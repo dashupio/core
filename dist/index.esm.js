@@ -3342,7 +3342,7 @@ var Dashup = /*#__PURE__*/function (_Base) {
 
                 if (!this.sessionID) this.sessionID = shortid$1(); // Run socket
 
-                this.socket = this.__opts.connection || (this.__opts.io || io).connect("".concat(this.__opts.url || 'https://dashup.io', "?api=v1").concat(this.__opts.key ? "&key=".concat(this.__opts.key) : '', "&session=").concat(this.sessionID), this.__opts.socket || {});
+                this.socket = this.__opts.connection || (this.__opts.io || io).connect("".concat(this.__opts.url || 'wss://dashup.com', "?api=v1").concat(this.__opts.key ? "&key=".concat(this.__opts.key) : '', "&session=").concat(this.sessionID), this.__opts.socket || {});
                 this.duRPC = new DashupRPC(this.socket); // await connected
 
                 done = new Promise(function (resolve) {
