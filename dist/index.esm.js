@@ -3641,7 +3641,15 @@ var Dashup = /*#__PURE__*/function (_Base) {
   }, {
     key: "can",
     value: function can(page, type) {
-      // check if owner
+      // check page specific
+      if (typeof page.get('acls') !== 'undefined') {
+        // includes type
+        if (Array.isArray(page.get('acls'))) return page.get('acls').includes(type); // return acls
+
+        return page.get('acls');
+      } // check if owner
+
+
       if ((this.get('acls') || []).find(function (a) {
         return a === true;
       })) return true; // check find

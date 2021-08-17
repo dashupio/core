@@ -307,6 +307,15 @@ export default class Dashup extends Base {
    * @param type
    */
   can(page, type) {
+    // check page specific
+    if (typeof page.get('acls') !== 'undefined') {
+      // includes type
+      if (Array.isArray(page.get('acls'))) return page.get('acls').includes(type);
+
+      // return acls
+      return page.get('acls');
+    }
+
     // check if owner
     if ((this.get('acls') || []).find(a => a === true)) return true;
 
