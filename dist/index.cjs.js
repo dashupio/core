@@ -3652,7 +3652,7 @@ var Dashup = /*#__PURE__*/function (_Base) {
     key: "can",
     value: function can(page, type) {
       // check page specific
-      if (page.get('link')) {
+      if (page !== null && page !== void 0 && page.get && page.get('link')) {
         // includes type
         if (Array.isArray(page.get('acls'))) return page.get('acls').includes(type); // return acls
 
