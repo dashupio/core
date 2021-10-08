@@ -1346,10 +1346,11 @@ var DashupRPC = /*#__PURE__*/function (_EventEmitter) {
 
     _this.socket.on('du.call', /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id, type) {
-        var _this$__endpoints,
-            _len,
+        var _len,
             args,
             _key,
+            respond,
+            _this$__endpoints,
             result,
             _args = arguments;
 
@@ -1357,52 +1358,53 @@ var DashupRPC = /*#__PURE__*/function (_EventEmitter) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                for (_len = _args.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+                  args[_key - 2] = _args[_key];
+                } // response
+
+
+                respond = args.pop(); // check endpoints
+
                 if (_this.__endpoints[type]) {
-                  _context.next = 2;
+                  _context.next = 4;
                   break;
                 }
 
-                return _context.abrupt("return", _this.socket.emit(id, {
+                return _context.abrupt("return", respond({
                   success: false,
                   message: 'endpoint not found'
                 }));
 
-              case 2:
-                _context.prev = 2;
-
-                for (_len = _args.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-                  args[_key - 2] = _args[_key];
-                }
-
-                _context.next = 6;
+              case 4:
+                _context.prev = 4;
+                _context.next = 7;
                 return (_this$__endpoints = _this.__endpoints)[type].apply(_this$__endpoints, args);
 
-              case 6:
+              case 7:
                 result = _context.sent; // return result
 
-                _this.socket.emit(id, {
+                respond({
                   result: result,
                   success: true
                 });
-
-                _context.next = 13;
+                _context.next = 14;
                 break;
 
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](2); // return result
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](4); // return result
 
-                _this.socket.emit(id, {
+                respond({
                   message: _context.t0.toString(),
                   success: false
                 });
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 10]]);
+        }, _callee, null, [[4, 11]]);
       }));
 
       return function (_x, _x2) {
@@ -1437,7 +1439,7 @@ var DashupRPC = /*#__PURE__*/function (_EventEmitter) {
         var _this2$socket; // calls endpoint on socket
 
 
-        _this2.socket.once(id, function (_ref3) {
+        (_this2$socket = _this2.socket).emit.apply(_this2$socket, ['du.call', id].concat(args, [function (_ref3) {
           var result = _ref3.result,
               message = _ref3.message,
               success = _ref3.success; // reject with message
@@ -1445,9 +1447,7 @@ var DashupRPC = /*#__PURE__*/function (_EventEmitter) {
           if (!success) return reject(message); // resolve
 
           resolve(result);
-        });
-
-        (_this2$socket = _this2.socket).emit.apply(_this2$socket, ['du.call', id].concat(args));
+        }]));
       });
     }
     /**
