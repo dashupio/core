@@ -1,12 +1,12 @@
 {
   "name": "@dashup/core",
   "description": "nothing yet",
-  "version": "1.2.16",
+  "version": "1.2.17",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "source": "src/index.ts",
   "dependencies": {
-    "@dashup/rpc": "0.0.3",
+    "@dashup/rpc": "0.0.5",
     "fast-deep-equal": "^3.1.3",
     "js-cookie": "^2.2.1",
     "shortid": "^2.2.16"
