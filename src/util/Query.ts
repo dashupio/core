@@ -18,12 +18,17 @@ export default class DashupQuery {
   /**
    * construct dashup query
    */
-  constructor(page, dashup, type = 'model') {
+  constructor(page, dashup, type = 'model', batch = false) {
     // set module
     this.page = page;
     this.type = type;
     this.query = [];
     this.dashup = dashup;
+
+    // set batch
+    this.batch = (newValue) => {
+      batch = newValue;
+    };
 
     // loop query methods
     ['where', 'eq', 'inc', 'gt', 'or', 'lt', 'gte', 'lte', 'skip', 'sort', 'limit', 'exists', 'search', 'match', 'ne', 'nin', 'in', 'or', 'and'].forEach((method) => {
@@ -43,6 +48,9 @@ export default class DashupQuery {
       this[method] = async (...args) => {
         // push to query
         this.query.push([method, args]);
+
+        // check batch
+        if (batch) return this.query;
 
         // call
         const data = await this.dashup.rpc(this.page ? {

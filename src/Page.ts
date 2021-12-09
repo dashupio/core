@@ -632,5 +632,15 @@ export default class DashupPage extends Base {
         return query[method](...args);
       };
     });
+
+    // enable batch
+    this.batch = (queries) => {
+      // return queries
+      return this.dashup.rpc({
+        type   : 'page',
+        page   : this.get('_id'),
+        struct : this.get('_id'),
+      }, `model.query.batch`, queries);
+    };
   }
 }

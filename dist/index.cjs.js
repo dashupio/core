@@ -1356,11 +1356,10 @@ var DashupRPC = /*#__PURE__*/function (_EventEmitter) {
 
     _this.socket.on('du.call', /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id, type) {
-        var _len,
+        var _this$__endpoints,
+            _len,
             args,
             _key,
-            respond,
-            _this$__endpoints,
             result,
             _args = arguments;
 
@@ -1368,53 +1367,52 @@ var DashupRPC = /*#__PURE__*/function (_EventEmitter) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                for (_len = _args.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-                  args[_key - 2] = _args[_key];
-                } // response
-
-
-                respond = args.pop(); // check endpoints
-
                 if (_this.__endpoints[type]) {
-                  _context.next = 4;
+                  _context.next = 2;
                   break;
                 }
 
-                return _context.abrupt("return", respond({
+                return _context.abrupt("return", _this.socket.emit(id, {
                   success: false,
                   message: 'endpoint not found'
                 }));
 
-              case 4:
-                _context.prev = 4;
-                _context.next = 7;
+              case 2:
+                _context.prev = 2;
+
+                for (_len = _args.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+                  args[_key - 2] = _args[_key];
+                }
+
+                _context.next = 6;
                 return (_this$__endpoints = _this.__endpoints)[type].apply(_this$__endpoints, args);
 
-              case 7:
+              case 6:
                 result = _context.sent; // return result
 
-                respond({
+                _this.socket.emit(id, {
                   result: result,
                   success: true
                 });
-                _context.next = 14;
+
+                _context.next = 13;
                 break;
 
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context["catch"](4); // return result
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](2); // return result
 
-                respond({
+                _this.socket.emit(id, {
                   message: _context.t0.toString(),
                   success: false
                 });
 
-              case 14:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[4, 11]]);
+        }, _callee, null, [[2, 10]]);
       }));
 
       return function (_x, _x2) {
@@ -1449,7 +1447,7 @@ var DashupRPC = /*#__PURE__*/function (_EventEmitter) {
         var _this2$socket; // calls endpoint on socket
 
 
-        (_this2$socket = _this2.socket).emit.apply(_this2$socket, ['du.call', id].concat(args, [function (_ref3) {
+        _this2.socket.once(id, function (_ref3) {
           var result = _ref3.result,
               message = _ref3.message,
               success = _ref3.success; // reject with message
@@ -1457,7 +1455,9 @@ var DashupRPC = /*#__PURE__*/function (_EventEmitter) {
           if (!success) return reject(message); // resolve
 
           resolve(result);
-        }]));
+        });
+
+        (_this2$socket = _this2.socket).emit.apply(_this2$socket, ['du.call', id].concat(args));
       });
     }
     /**
@@ -2815,7 +2815,16 @@ var DashupPage = /*#__PURE__*/function (_Base) {
 
           return query[method].apply(query, arguments);
         };
-      });
+      }); // enable batch
+
+      this.batch = function (queries) {
+        // return queries
+        return _this8.dashup.rpc({
+          type: 'page',
+          page: _this8.get('_id'),
+          struct: _this8.get('_id')
+        }, "model.query.batch", queries);
+      };
     }
   }]);
 
@@ -3061,6 +3070,7 @@ function DashupQuery(page, dashup) {
   var _this = this;
 
   var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'model';
+  var batch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
   _classCallCheck$1(this, DashupQuery);
 
@@ -3068,7 +3078,12 @@ function DashupQuery(page, dashup) {
   this.page = page;
   this.type = type;
   this.query = [];
-  this.dashup = dashup; // loop query methods
+  this.dashup = dashup; // set batch
+
+  this.batch = function (newValue) {
+    batch = newValue;
+  }; // loop query methods
+
 
   ['where', 'eq', 'inc', 'gt', 'or', 'lt', 'gte', 'lte', 'skip', 'sort', 'limit', 'exists', 'search', 'match', 'ne', 'nin', 'in', 'or', 'and'].forEach(function (method) {
     // set method
@@ -3103,21 +3118,29 @@ function DashupQuery(page, dashup) {
               }
 
               // push to query
-              _this.query.push([method, args]); // call
+              _this.query.push([method, args]); // check batch
 
 
-              _context.next = 4;
+              if (!batch) {
+                _context.next = 4;
+                break;
+              }
+
+              return _context.abrupt("return", _this.query);
+
+            case 4:
+              _context.next = 6;
               return _this.dashup.rpc(_this.page ? {
                 type: 'page',
                 page: _this.page,
                 struct: _this.page
               } : null, "".concat(type, ".query"), _this.query);
 
-            case 4:
+            case 6:
               data = _context.sent;
 
               if (!Array.isArray(data)) {
-                _context.next = 7;
+                _context.next = 9;
                 break;
               }
 
@@ -3125,18 +3148,18 @@ function DashupQuery(page, dashup) {
                 return item && item._id ? new models[_this.type || 'model'](item, _this.dashup, _this.type) : item;
               }));
 
-            case 7:
+            case 9:
               if (!(data && _typeof(data) === 'object')) {
-                _context.next = 9;
+                _context.next = 11;
                 break;
               }
 
               return _context.abrupt("return", data._id ? new models[_this.type || 'model'](data, _this.dashup, _this.type) : data);
 
-            case 9:
+            case 11:
               return _context.abrupt("return", data);
 
-            case 10:
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -3670,7 +3693,7 @@ var Dashup = /*#__PURE__*/function (_Base) {
       } // return found
 
 
-      return (this.get('acls') || []).includes("".concat(typeof page === 'string' ? page : page.get('_id'), ".").concat(type));
+      return (this.get('acls') || []).includes("".concat(typeof page === 'string' ? page : page === null || page === void 0 ? void 0 : page.get('_id'), ".").concat(type));
     } // //////////////////////////////////////////////////////////////////////
     //
     // STATIC METHODS

@@ -326,7 +326,7 @@ export default class Dashup extends Base {
     }
 
     // return found
-    return (this.get('acls') || []).includes(`${typeof page === 'string' ? page : page.get('_id')}.${type}`);
+    return (this.get('acls') || []).includes(`${typeof page === 'string' ? page : page?.get('_id')}.${type}`);
   }
 
 
