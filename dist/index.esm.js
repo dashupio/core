@@ -2795,7 +2795,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
       }(); // query and dones
 
 
-      var queryBys = ['where', 'eq', 'gt', 'or', 'lt', 'gte', 'lte', 'skip', 'sort', 'limit', 'match', 'inc', 'ne', 'nin', 'in', 'or', 'and', 'sum', 'search', 'avg', 'find', 'count', 'findOne', 'findById', 'findByIds', 'listen', 'listenOne', 'listenById']; // create calls
+      var queryBys = ['batch', 'where', 'eq', 'gt', 'or', 'lt', 'gte', 'lte', 'skip', 'sort', 'limit', 'match', 'inc', 'ne', 'nin', 'in', 'or', 'and', 'sum', 'search', 'avg', 'find', 'count', 'chart', 'findOne', 'findById', 'findByIds', 'listen', 'listenOne', 'listenById']; // create calls
 
       queryBys.forEach(function (method) {
         // create function
@@ -2807,7 +2807,7 @@ var DashupPage = /*#__PURE__*/function (_Base) {
         };
       }); // enable batch
 
-      this.batch = function (queries) {
+      this.execBatch = function (queries) {
         // return queries
         return _this8.dashup.rpc({
           type: 'page',
@@ -3071,7 +3071,10 @@ function DashupQuery(page, dashup) {
   this.dashup = dashup; // set batch
 
   this.batch = function (newValue) {
-    batch = newValue;
+    // batch
+    batch = typeof newValue === 'undefined' ? true : newValue; // return this
+
+    return _this;
   }; // loop query methods
 
 
@@ -3090,7 +3093,7 @@ function DashupQuery(page, dashup) {
     };
   }); // complete
 
-  ['sum', 'avg', 'count', 'find', 'findOne', 'findById', 'findByIds'].forEach(function (method) {
+  ['sum', 'avg', 'count', 'chart', 'find', 'findOne', 'findById', 'findByIds'].forEach(function (method) {
     // push to query
     _this[method] = /*#__PURE__*/_asyncToGenerator$1( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       var _len2,

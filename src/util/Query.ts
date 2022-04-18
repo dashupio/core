@@ -27,7 +27,11 @@ export default class DashupQuery {
 
     // set batch
     this.batch = (newValue) => {
-      batch = newValue;
+      // batch
+      batch = typeof newValue === 'undefined' ? true : newValue;
+
+      // return this
+      return this;
     };
 
     // loop query methods
@@ -43,7 +47,7 @@ export default class DashupQuery {
     });
 
     // complete
-    ['sum', 'avg', 'count', 'find', 'findOne', 'findById', 'findByIds'].forEach((method) => {
+    ['sum', 'avg', 'count', 'chart', 'find', 'findOne', 'findById', 'findByIds'].forEach((method) => {
       // push to query
       this[method] = async (...args) => {
         // push to query

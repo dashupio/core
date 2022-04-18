@@ -619,7 +619,7 @@ export default class DashupPage extends Base {
     };
 
     // query and dones
-    const queryBys = ['where', 'eq', 'gt', 'or', 'lt', 'gte', 'lte', 'skip', 'sort', 'limit', 'match', 'inc', 'ne', 'nin', 'in', 'or', 'and', 'sum', 'search', 'avg', 'find', 'count', 'findOne', 'findById', 'findByIds', 'listen', 'listenOne', 'listenById'];
+    const queryBys = ['batch', 'where', 'eq', 'gt', 'or', 'lt', 'gte', 'lte', 'skip', 'sort', 'limit', 'match', 'inc', 'ne', 'nin', 'in', 'or', 'and', 'sum', 'search', 'avg', 'find', 'count', 'chart', 'findOne', 'findById', 'findByIds', 'listen', 'listenOne', 'listenById'];
 
     // create calls
     queryBys.forEach((method) => {
@@ -634,7 +634,7 @@ export default class DashupPage extends Base {
     });
 
     // enable batch
-    this.batch = (queries) => {
+    this.execBatch = (queries) => {
       // return queries
       return this.dashup.rpc({
         type   : 'page',
